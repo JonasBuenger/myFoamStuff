@@ -1,0 +1,5 @@
+SOURCE = \
+artComp.C\
+myTemperatureFvPatchScalarField.C\
+myHeatFluxFvPatchVectorField.C\
+patchNormalNeighbours.C

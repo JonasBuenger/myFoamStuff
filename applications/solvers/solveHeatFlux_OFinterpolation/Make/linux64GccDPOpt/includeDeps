@@ -1,0 +1,3 @@
+include artComp.dep
+include myTemperatureFvPatchScalarField.dep
+include myHeatFluxFvPatchVectorField.dep

@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+#creating blockMeshDic from parametrization
+m4 -P constant/polyMesh/pipeOGrid.m4 > constant/polyMesh/blockMeshDict
+#creating OpenFOAM mesh from blockMeshDict
+blockMesh
+

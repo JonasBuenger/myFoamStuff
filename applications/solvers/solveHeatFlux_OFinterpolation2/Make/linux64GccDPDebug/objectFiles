@@ -1,0 +1,5 @@
+OBJECTS = \
+$(OBJECTS_DIR)/artComp.o\
+$(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o\
+$(OBJECTS_DIR)/interpolateThetaAtBoundary.o

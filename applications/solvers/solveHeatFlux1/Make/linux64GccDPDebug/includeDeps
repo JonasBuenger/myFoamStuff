@@ -1,0 +1,3 @@
+include solveHeatFlux.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/1/myTemperatureFvPatchScalarField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/1/myHeatFluxFvPatchVectorField.dep

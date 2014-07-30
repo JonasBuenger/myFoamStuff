@@ -1,0 +1,4 @@
+$(OBJECTS_DIR)/icoFoam.o: $(EXE_DEP)
+$(OBJECTS_DIR)/icoFoam.o:
+	@SOURCE_DIR=.
+	SOURCE=icoFoam.C ; $(Ctoo)

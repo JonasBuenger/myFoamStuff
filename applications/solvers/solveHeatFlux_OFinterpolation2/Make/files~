@@ -1,0 +1,6 @@
+artComp.C
+myTemperatureFvPatchScalarField.C
+myHeatFluxFvPatchVectorField.C
+interpolateThetaAtBoundary.C
+
+EXE = $(FOAM_APPBIN)/solveHeatFlux_OFinterpolation2

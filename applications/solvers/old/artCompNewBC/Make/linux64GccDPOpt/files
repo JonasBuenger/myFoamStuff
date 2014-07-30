@@ -1,0 +1,7 @@
+# 1 "files"
+# 1 "<Kommandozeile>"
+# 1 "files"
+artCompNewBC.C
+myHeatFluxFvPatchVectorField.C
+
+EXE = $(FOAM_APPBIN)/artCompNewBC

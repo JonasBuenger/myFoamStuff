@@ -1,0 +1,5 @@
+artComp.C
+myTemperatureFvPatchScalarField.C
+myHeatFluxFvPatchVectorField.C
+
+EXE = $(FOAM_APPBIN)/solveHeatFlux

@@ -1,0 +1,6 @@
+# 1 "files"
+# 1 "<Kommandozeile>"
+# 1 "files"
+artComp.C
+
+EXE = $(FOAM_APPBIN)/artComp

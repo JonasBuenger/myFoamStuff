@@ -1,0 +1,8 @@
+artComp.C
+myTemperatureFvPatchScalarField.C
+myHeatFluxFvPatchVectorField.C
+equalizationBasis.C
+MyMatrixFunctions.C
+approximations4ThetaAtBoundary.C
+
+EXE = $(FOAM_APPBIN)/solveHeatFlux_Ausgleichsrechnung

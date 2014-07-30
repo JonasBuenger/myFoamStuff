@@ -1,0 +1,4 @@
+DEPENDENCIES = \
+spielzeug.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep

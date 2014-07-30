@@ -1,0 +1,6 @@
+LOCAL_OBJECTS = \
+testImplicitDiv.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o\
+myImplicitScheme.o\
+myImplicitDivScheme.o

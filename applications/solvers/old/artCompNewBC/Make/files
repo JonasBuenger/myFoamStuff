@@ -1,0 +1,4 @@
+artCompNewBC.C
+myHeatFluxFvPatchVectorField.C
+
+EXE = $(FOAM_APPBIN)/artCompNewBC

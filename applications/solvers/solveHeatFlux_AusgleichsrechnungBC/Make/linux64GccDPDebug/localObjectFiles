@@ -1,0 +1,7 @@
+LOCAL_OBJECTS = \
+artComp.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o\
+equalizationBasis.o\
+MyMatrixFunctions.o\
+approximations4ThetaAtBoundary.o

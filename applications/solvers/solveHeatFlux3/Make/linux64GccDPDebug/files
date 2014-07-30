@@ -1,0 +1,42 @@
+# 1 "files"
+# 1 "<command-line>"
+
+
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+
+# 17 "/usr/include/stdc-predef.h" 3 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2 "<command-line>" 2
+# 1 "files"
+solveHeatFlux.C
+
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/myTemperatureFvPatchScalarField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/myHeatFluxFvPatchVectorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/approximations4ThetaAtBoundary.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/equalizationBasis.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/MyMatrixFunctions.C
+
+EXE = $(FOAM_USER_APPBIN)/solveHeatFlux3
+

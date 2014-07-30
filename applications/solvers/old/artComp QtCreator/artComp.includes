@@ -1,0 +1,13 @@
+/home/jonas/OpenFOAM/jonas-2.2.0/applications/solvers/artComp QtCreator
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/interpolations/primitivePatchInterpolation
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/db/runTimeSelection/construction
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/applications/utilities/preProcessing/mapFields
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/lnInclude
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/include/createTime.H
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/include/createMesh.H
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/include
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/OpenFOAM/matrices/simpleMatrix
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/finiteVolume/fields/volFields
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/finiteVolume/interpolation/surfaceInterpolation/surfaceInterpolation
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/finiteVolume/lnInclude
+/home/jonas/OpenFOAM/OpenFOAM-2.2.0/src/finiteVolume/cfdTools/general/include

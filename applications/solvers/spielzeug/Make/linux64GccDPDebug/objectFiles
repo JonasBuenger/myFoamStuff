@@ -1,0 +1,4 @@
+OBJECTS = \
+$(OBJECTS_DIR)/spielzeug.o\
+$(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o

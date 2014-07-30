@@ -1,0 +1,4 @@
+DEPENDENCIES = \
+solveHeatFlux.dep\
+myTemperatureFvPatchScalarField.dep\
+myHeatFluxFvPatchVectorField.dep

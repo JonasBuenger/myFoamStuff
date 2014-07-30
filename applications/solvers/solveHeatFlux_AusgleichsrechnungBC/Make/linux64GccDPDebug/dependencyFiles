@@ -1,0 +1,7 @@
+DEPENDENCIES = \
+artComp.dep\
+myTemperatureFvPatchScalarField.dep\
+myHeatFluxFvPatchVectorField.dep\
+equalizationBasis.dep\
+MyMatrixFunctions.dep\
+approximations4ThetaAtBoundary.dep

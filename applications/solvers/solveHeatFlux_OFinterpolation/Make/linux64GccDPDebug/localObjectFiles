@@ -1,0 +1,5 @@
+LOCAL_OBJECTS = \
+artComp.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o\
+interpolateThetaAtBoundary.o

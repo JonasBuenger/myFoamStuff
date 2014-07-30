@@ -1,0 +1,4 @@
+LOCAL_OBJECTS = \
+spielzeug.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o

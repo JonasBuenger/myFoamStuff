@@ -1,0 +1,3 @@
+artComp.C
+
+EXE = $(FOAM_APPBIN)/artComp

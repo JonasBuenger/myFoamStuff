@@ -1,0 +1,4 @@
+DEPENDENCIES = \
+artComp.dep\
+myTemperatureFvPatchScalarField.dep\
+myHeatFluxFvPatchVectorField.dep
