@@ -1,5 +1,4 @@
 include blockCoupledHeatTransfer.dep
 include $(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep
 include $(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep
-include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/myImplicitScheme.dep
 include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.dep

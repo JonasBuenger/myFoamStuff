@@ -2,5 +2,4 @@ SOURCE = \
 blockCoupledHeatTransfer.C\
 $(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.C\
 $(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.C\
-$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/myImplicitScheme.C\
 $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.C

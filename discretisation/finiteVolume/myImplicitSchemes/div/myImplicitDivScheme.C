@@ -1,66 +1,58 @@
 #include "myImplicitDivScheme.H"
 
-#include "fvCFD.H"
-#include "fvMatrix.H"
-
-Foam::myImplicitDivScheme::myImplicitDivScheme(const volVectorField vf)
-    :myImplicitScheme(vf)
+Foam::myImplicitDivScheme::myImplicitDivScheme(volVectorField& vf):
+    vf_(vf),
+    mesh_(vf.mesh())
 {
-    Info << "bla" << endl;
-};
+   // initialize fields
+   diag_   = vectorField(mesh_.nCells(), pTraits<vector>::zero);
+   upper_  = vectorField(mesh_.owner().size(), pTraits<vector>::zero);
+   lower_  = vectorField(mesh_.owner().size(), pTraits<vector>::zero);
+   source_ = scalarField(mesh_.nCells(), pTraits<scalar>::zero);
 
+   // update coefficients
+   updateCoeffs();
+}
 
-tmp<fvScalarMatrix>
-Foam::myImplicitDivScheme::coefficients(int numComponent){
+void
+Foam::myImplicitDivScheme::updateCoeffs(){
 
-    // FVMATRIX
-    volScalarField vf0 = vf_.component(numComponent);
-
-    tmp<fvScalarMatrix> tfvm
-    (
-        new fvScalarMatrix
-        (
-            vf0,
-            vf_.dimensions()/dimLength
-        )
+    // interpolation scheme
+    tmp<surfaceInterpolationScheme<scalar> > tinterpScheme(
+           surfaceInterpolationScheme<scalar>::New(
+                   mesh_,
+                   mesh_.schemesDict().interpolationScheme(vf_.name())
+           )
     );
-    fvScalarMatrix& fvm = tfvm();
+    const surfaceInterpolationScheme<scalar>& interpolationScheme = tinterpScheme();
 
-    // INTERPOLATION SCHEME
-    tmp<surfaceInterpolationScheme<scalar> > tinterpScheme_(
-            surfaceInterpolationScheme<scalar>::New(
-                    vf_.mesh(),
-                    mesh_.schemesDict().interpolationScheme(vf_.name())
-            )
-    );
-
-    tmp<surfaceScalarField> tweights = tinterpScheme_().weights(vf_.component(numComponent));
+    tmp<surfaceScalarField> tweights = interpolationScheme.weights(mag(vf_));
     const surfaceScalarField& weights = tweights();
 
-    // COEFFS AND SOURCE
-    scalarField& diag = fvm.diag();
-    scalarField& upper = fvm.upper();
-    scalarField& lower = fvm.lower();
-    scalarField& source = fvm.source();
+    // reset diag and source
+    diag_   = vectorField(mesh_.nCells(), pTraits<vector>::zero);
+    source_ = scalarField(mesh_.nCells(), pTraits<scalar>::zero);
 
-    // CONTRIBUTION INTERNAL FIELD
-    for(int i=0; i<mesh_.owner().size(); i++){
-        int o = mesh_.owner()[i];
-        int n = mesh_.neighbour()[i];
-        scalar w = weights.internalField()[i];
-        scalar s = mesh_.Sf()[i].component(numComponent);
+    //if(mesh_.moving()){  // upper lower only need to be recomputed if mesh moves (?)
+        // CONTRIBUTION INTERNAL FIELD
+        for(int i=0; i<mesh_.owner().size(); i++){
+            int o = mesh_.owner()[i];
+            int n = mesh_.neighbour()[i];
+            scalar w = weights.internalField()[i];
+            vector s = mesh_.Sf()[i];
 
-        diag[o] +=  s*w;
-        diag[n] -=  s*(1-w);
-        lower[i] = -s*w;
-        upper[i] =  s*(1-w);
-
-    }
+            diag_[o] +=  s*w;
+            diag_[n] -=  s*(1-w);
+            lower_[i] = -s*w;
+            upper_[i] =  s*(1-w);
+        }
+    //}
 
     // CONTRIBUTION BOUNDARY FIELD ...      (update coeffs in solver!!!)
-    //      vf_patchFace = ic * vf_boundaryCell  +  bc
-    // vf_.boundaryField().updateCoeffs();
+    //
+    //      vf_boundFace = ic * vf_boundCell  +  bc
 
+    vf_.boundaryField().updateCoeffs();
     forAll(vf_.boundaryField(), patchI){ // loop all patches
 
         const fvPatchField<vector>& patchVolField = vf_.boundaryField()[patchI];
@@ -80,12 +72,33 @@ Foam::myImplicitDivScheme::coefficients(int numComponent){
 
             label c = patch.faceCells()[faceI];
 
-            diag[c]   += ic[faceI].component(numComponent) * sn[faceI].component(numComponent);
-            source[c] -= bc[faceI].component(numComponent) * sn[faceI].component(numComponent);
+            diag_[c]   += Vector<scalar>(ic[faceI].x() * sn[faceI].x(),
+                                         ic[faceI].y() * sn[faceI].y(),
+                                         ic[faceI].z() * sn[faceI].z());
+            source_[c] -= bc[faceI] & sn[faceI];
 
         }
 
     }
 
-    return tfvm;
-};
+}
+
+const vectorField&
+Foam::myImplicitDivScheme::coeffsDiag(){
+    return diag_;
+}
+
+const vectorField&
+Foam::myImplicitDivScheme::coeffsUpper(){
+    return upper_;
+}
+
+const vectorField&
+Foam::myImplicitDivScheme::coeffsLower(){
+    return lower_;
+}
+
+const scalarField&
+Foam::myImplicitDivScheme::coeffsSource(){
+    return source_;
+}

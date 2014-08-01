@@ -1,0 +1,6 @@
+DEPENDENCIES = \
+testImplicit.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep\
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.dep\
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad/myImplicitGradScheme.dep

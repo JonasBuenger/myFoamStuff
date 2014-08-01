@@ -83,7 +83,6 @@ int main(int argc, char *argv[])
             // ... block source
             Field<vector4> S(mesh.nCells(), vector4::zero);
 
-
             /**************************************************************
              * SET MATRIX COEFFICIENTS
              *************************************************************/

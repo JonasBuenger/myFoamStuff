@@ -1,17 +1,30 @@
 #ifndef MYIMPLICITDIVSCHEME_H
 #define MYIMPLICITDIVSCHEME_H
 
-#include "myImplicitScheme.H"
 #include "fvCFD.H"
 
 namespace Foam{
 
+class myImplicitDivScheme{
 
-class myImplicitDivScheme : public myImplicitScheme{
+private:
+    volVectorField& vf_;
+    const fvMesh& mesh_;
+    //surfaceInterpolationScheme<scalar> interpolationScheme_;
+    bool upToDate_;
+    vectorField diag_;
+    vectorField upper_;
+    vectorField lower_;
+    scalarField source_;
 
 public:
-    myImplicitDivScheme(const volVectorField);
-    tmp<fvScalarMatrix> coefficients(int numComponent);
+    myImplicitDivScheme(volVectorField&);
+    void updateCoeffs();
+    const vectorField& coeffsDiag();
+    const vectorField& coeffsUpper();
+    const vectorField& coeffsLower();
+    const scalarField& coeffsSource();
+
 };
 
 

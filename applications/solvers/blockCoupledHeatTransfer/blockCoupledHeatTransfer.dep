@@ -674,8 +674,8 @@ blockCoupledHeatTransfer.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/blockVectorNM
 blockCoupledHeatTransfer.dep: $(WM_PROJECT_DIR)/src/VectorN/lnInclude/blockMatrixTools.H
 blockCoupledHeatTransfer.dep: $(WM_PROJECT_DIR)/src/VectorN/lnInclude/blockMatrixTools.C
 blockCoupledHeatTransfer.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/myImplicitSchemes.H
-blockCoupledHeatTransfer.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/myImplicitScheme.H
 blockCoupledHeatTransfer.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.H
+blockCoupledHeatTransfer.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad/myImplicitGradSchemes.H
 blockCoupledHeatTransfer.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/setRootCase.H
 blockCoupledHeatTransfer.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createTime.H
 blockCoupledHeatTransfer.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createMesh.H
