@@ -20,20 +20,20 @@ FoamFile
     up
     {
         type            patch;
-        nFaces          80;
-        startFace       2480;
+        nFaces          40;
+        startFace       760;
     }
     hole
     {
         type            patch;
-        nFaces          80;
-        startFace       2560;
+        nFaces          40;
+        startFace       800;
     }
     frontAndBack
     {
         type            empty;
-        nFaces          2560;
-        startFace       2640;
+        nFaces          800;
+        startFace       840;
     }
 )
 

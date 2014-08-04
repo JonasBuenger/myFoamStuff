@@ -35,7 +35,7 @@ boundaryField
         alpha	        1;
 	Theta_wall	4;
 	gamma		1;
-	g0		(0 0 0);
+	g0		(30 0 0);
 	value		uniform (0 0 0);
     }
     frontAndBack

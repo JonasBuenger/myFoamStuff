@@ -22,38 +22,20 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear;
-    Theta         implicit;
+    default       Gauss linear;
 }
 
 divSchemes
 {
-    default     Gauss linear;
     div(s)      Gauss linear;
 }
 
 laplacianSchemes
 {
-    default         Gauss linear corrected;
     laplacian(nu,s) Gauss linear corrected;//orthogonal;
 }
 
-interpolationSchemes
-{
-    default         linear;
-//    interpolate(HbyA) linear;
-}
 
-snGradSchemes
-{
-    default         orthogonal;
-}
-
-fluxRequired
-{
-    default         no;
-    Theta           ;
-}
 
 
 // ************************************************************************* //

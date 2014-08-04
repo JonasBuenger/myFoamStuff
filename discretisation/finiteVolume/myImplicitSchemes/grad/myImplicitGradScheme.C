@@ -14,27 +14,35 @@ Foam::myImplicitGradScheme::myImplicitGradScheme(volScalarField& vf):
    updateCoeffs();
 }
 
-void
-Foam::myImplicitGradScheme::updateCoeffs(){
+const surfaceScalarField Foam::myImplicitGradScheme::getWeights(){
 
     // interpolation scheme
     tmp<surfaceInterpolationScheme<scalar> > tinterpScheme(
            surfaceInterpolationScheme<scalar>::New(
                    mesh_,
-                   mesh_.schemesDict().interpolationScheme("grad(" + vf_.name() + ")")
+                   mesh_.schemesDict().interpolationScheme(vf_.name())
            )
     );
     const surfaceInterpolationScheme<scalar>& interpolationScheme = tinterpScheme();
 
-    tmp<surfaceScalarField> tweights = interpolationScheme.weights(mag(vf_));
-    const surfaceScalarField& weights = tweights();
+    tmp<surfaceScalarField> tweights = interpolationScheme.weights(vf_);
+    return tweights();
+
+}
+
+void
+Foam::myImplicitGradScheme::updateCoeffs(){
+
+    // interpolation weights
+    const surfaceScalarField& weights = getWeights();
 
     // reset diag and source
     diag_   = vectorField(mesh_.nCells(), pTraits<vector>::zero);
     source_ = vectorField(mesh_.nCells(), pTraits<vector>::zero);
 
     // contribution of internal Field ...
-    for(int i=0; i<mesh_.owner().size(); i++){
+    for(int i=0; i<mesh_.owner().size(); i++)
+    {
         int o = mesh_.owner()[i];
         int n = mesh_.neighbour()[i];
         scalar w = weights.internalField()[i];
@@ -47,7 +55,7 @@ Foam::myImplicitGradScheme::updateCoeffs(){
 
     }
 
-    // CONTRIBUTION BOUNDARY FIELD ...      (update coeffs in solver!!!)
+    // CONTRIBUTION BOUNDARY FIELD ...
     //
     //      vf_boundFace = ic * vf_boundCell  +  bc
 
@@ -59,15 +67,15 @@ Foam::myImplicitGradScheme::updateCoeffs(){
 
         tmp<Field<scalar> > tic = patchVolField.valueInternalCoeffs(weightsPatchVolField);
         tmp<Field<scalar> > tbc = patchVolField.valueBoundaryCoeffs(weightsPatchVolField);
-        const Field<scalar> ic = tic();     // internal coefficient
-        const Field<scalar> bc = tbc();     // boundary coefficient
+        const Field<scalar>& ic = tic();     // internal coefficient
+        const Field<scalar>& bc = tbc();     // boundary coefficient
 
         const fvPatch& patch = patchVolField.patch();   // reference to patch
 
         tmp<vectorField> tsn = patch.Sf();
         const vectorField sn = tsn();   // patch normals
 
-        forAll(patchVolField, faceI){ // loop all faces
+        forAll(patchVolField, faceI){   // loop all faces
 
             label c = patch.faceCells()[faceI];     // boundary cell
 
@@ -76,7 +84,12 @@ Foam::myImplicitGradScheme::updateCoeffs(){
         }
 
     }
-
+    /*
+    diag_ = vector(10,10,10);
+    upper_ = vector(20,20,20);
+    lower_ = vector(30,30,30);
+    source_ = vector(40,40,40);
+    */
 }
 
 

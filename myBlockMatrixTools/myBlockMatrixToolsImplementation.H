@@ -381,13 +381,13 @@ void addVectorDiv
     myBlockMatrixTools::addCouplingDiag(numEqn,firstDir+1,diag.component(1),blockM);
     myBlockMatrixTools::addCouplingDiag(numEqn,firstDir+2,diag.component(2),blockM);
 
-    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+1,upper.component(0),blockM);
-    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+2,upper.component(1),blockM);
-    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+3,upper.component(2),blockM);
+    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+0,upper.component(0),blockM);
+    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+1,upper.component(1),blockM);
+    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+2,upper.component(2),blockM);
 
-    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+1,lower.component(0),blockM);
-    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+2,lower.component(1),blockM);
-    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+3,lower.component(2),blockM);
+    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+0,lower.component(0),blockM);
+    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+1,lower.component(1),blockM);
+    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+2,lower.component(2),blockM);
 
     myBlockMatrixTools::addSource(numEqn,source,blockB);
 
@@ -405,18 +405,28 @@ void insertVectorEquation
 )
 {
     // matrix components are scalars --> noncoupled
-    const scalarField& diag = m.diag();
-    const scalarField& upper = m.upper();
-    const scalarField& lower = m.lower();
-    const vectorField& source = m.source();
-
-    for(int i=0; i<3; i++){
-        insertDiag  (firstEqn+i, diag,  blockM);
-        insertUpper (firstEqn+i, upper, blockM);
-        insertLower (firstEqn+i, lower, blockM);
-        insertSource(firstEqn+i, source.component(i),blockB);
-        Foam::blockMatrixTools::blockInsert(firstEqn+i, m.psi().component(i), blockX);
+    if(m.hasDiag()){
+        const scalarField& diag = m.diag();
+        insertDiag  (firstEqn+0, diag,  blockM);
+        insertDiag  (firstEqn+1, diag,  blockM);
+        insertDiag  (firstEqn+2, diag,  blockM);
     }
+    if(m.hasUpper()){
+        const scalarField& upper = m.upper();
+        insertUpper (firstEqn+0, upper, blockM);
+        insertUpper (firstEqn+1, upper, blockM);
+        insertUpper (firstEqn+2, upper, blockM);
+    }
+    if(m.hasLower()){
+        const scalarField& lower = m.lower();
+        insertLower (firstEqn+0, lower, blockM);
+        insertLower (firstEqn+1, lower, blockM);
+        insertLower (firstEqn+2, lower, blockM);
+    }
+
+    insertSource(firstEqn+0, m.source().component(0),blockB);
+    insertSource(firstEqn+1, m.source().component(1),blockB);
+    insertSource(firstEqn+2, m.source().component(2),blockB);
 
 }
 
@@ -433,21 +443,23 @@ void addScalarGrad
     Field<BlockType>& blockB
 )
 {
-/*
-    myBlockMatrixTools::addCouplingDiag(numEqn,firstDir+0,diag.component(0),blockM);
-    myBlockMatrixTools::addCouplingDiag(numEqn,firstDir+1,diag.component(1),blockM);
-    myBlockMatrixTools::addCouplingDiag(numEqn,firstDir+2,diag.component(2),blockM);
 
-    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+1,upper.component(0),blockM);
-    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+2,upper.component(1),blockM);
-    myBlockMatrixTools::addCouplingUpper(numEqn,firstDir+3,upper.component(2),blockM);
+    myBlockMatrixTools::addCouplingDiag(firstEqn+0, cmptDir, diag.component(0), blockM);
+    myBlockMatrixTools::addCouplingDiag(firstEqn+1, cmptDir, diag.component(1), blockM);
+    myBlockMatrixTools::addCouplingDiag(firstEqn+2, cmptDir, diag.component(2), blockM);
 
-    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+1,lower.component(0),blockM);
-    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+2,lower.component(1),blockM);
-    myBlockMatrixTools::addCouplingLower(numEqn,firstDir+3,lower.component(2),blockM);
+    myBlockMatrixTools::addCouplingUpper(firstEqn+0, cmptDir, upper.component(0), blockM);
+    myBlockMatrixTools::addCouplingUpper(firstEqn+1, cmptDir, upper.component(1), blockM);
+    myBlockMatrixTools::addCouplingUpper(firstEqn+2, cmptDir, upper.component(2), blockM);
 
-    myBlockMatrixTools::addSource(numEqn,source,blockB);
-*/
+    myBlockMatrixTools::addCouplingLower(firstEqn+0, cmptDir, lower.component(0), blockM);
+    myBlockMatrixTools::addCouplingLower(firstEqn+1, cmptDir, lower.component(1), blockM);
+    myBlockMatrixTools::addCouplingLower(firstEqn+2, cmptDir, lower.component(2), blockM);
+
+    myBlockMatrixTools::addSource(firstEqn+0, source.component(0), blockB);
+    myBlockMatrixTools::addSource(firstEqn+1, source.component(1), blockB);
+    myBlockMatrixTools::addSource(firstEqn+2, source.component(2), blockB);
+
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

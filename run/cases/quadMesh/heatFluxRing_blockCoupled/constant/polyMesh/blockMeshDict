@@ -21,8 +21,8 @@ pra 2.0;
 mri -0.5;
 mra -2;
 
-tang 16;
-rad 20;
+tang 10;
+rad 10;
 //p 20;
 dz 0.1;
 

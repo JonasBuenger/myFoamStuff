@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     {
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
-        int nNonOrthCorr = 0;
+#       include "readSIMPLEControls.H"
 
         for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
         {
@@ -80,17 +80,23 @@ int main(int argc, char *argv[])
             // unknown vector:  s.x()
             //                  s.y()
             //                  s.z()
+            //                  Theta
             //
             // matrix:          0- heatTransferEqn.x()
             //                  1- heatTransferEqn.y()
             //                  2- heatTransferEqn.z()
-            //                  3- heatContinuityEqn
+            //                  3- continuityEqn
 
             // ... block matrix blockM
             BlockLduMatrix<vector4> blockM(mesh);
 
-            // ... block source blockB
+            blockM.diag().asSquare() = tensor4::zero;
+            blockM.upper().asSquare() = tensor4::zero;
+            blockM.lower().asSquare() = tensor4::zero;
+
+            // ... block source vector blockB
             Field<vector4> blockB(mesh.nCells(), vector4::zero);
+            blockB = vector4::zero;
 
 
             /**************************************************************
@@ -100,12 +106,14 @@ int main(int argc, char *argv[])
             // HEAT TRANSFER ...
 
             // generate first part using standard FOAM-ext
+            s.boundaryField().updateCoeffs();
             fvVectorMatrix sEqn
             (
-                 fvm::ddt(s)
-               - fvm::laplacian(nu,s)
-               + fvm::Sp(corrDim,s)
-            // + fvc::grad(Theta)
+                  fvm::ddt(s)
+                - fvm::laplacian(nu,s)
+                + fvm::Sp(corrDim,s)
+            //  + fvc::grad(Theta)
+            //  == 0
             );
 
             myBlockMatrixTools::insertVectorEquation(0, sEqn, blockM, block_sT, blockB);
@@ -123,10 +131,13 @@ int main(int argc, char *argv[])
             // CONTINUITY EQUATION ...
 
             // generate first part using standard FOAM-ext
+            Theta.boundaryField().updateCoeffs();
             fvScalarMatrix ThetaEqn
             (
-                 fvm::ddt(Theta)
-            // + fvc::div(s)
+                  (1/beta) *
+                  fvm::ddt(Theta)
+            //  + fvc::div(s)
+            //    == 0
             );
 
             blockMatrixTools::insertEquation(3, ThetaEqn, blockM, block_sT, blockB);

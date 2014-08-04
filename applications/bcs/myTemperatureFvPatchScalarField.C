@@ -157,8 +157,8 @@ void Foam::myTemperatureFvPatchScalarField::updateCoeffs()
 
     for(int i=0; i<patch().size(); i++){
         boundaryTheta[i] = Theta[patch().faceCells()[i]]
-                            + ( ThetaGradient[i] & patchDeltas[i] );
-                          //+ ( ThetaGradient[patch().faceCells()[i]] & patchDeltas[i] );
+                          //  + ( ThetaGradient[i] & patchDeltas[i] );
+                          + ( ThetaGradient[patch().faceCells()[i]] & patchDeltas[i] );
     }
 
     fixedValueFvPatchScalarField::updateCoeffs();

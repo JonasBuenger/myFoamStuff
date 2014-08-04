@@ -14,20 +14,27 @@ Foam::myImplicitDivScheme::myImplicitDivScheme(volVectorField& vf):
    updateCoeffs();
 }
 
-void
-Foam::myImplicitDivScheme::updateCoeffs(){
+const surfaceScalarField Foam::myImplicitDivScheme::getWeights(){
 
     // interpolation scheme
-    tmp<surfaceInterpolationScheme<scalar> > tinterpScheme(
-           surfaceInterpolationScheme<scalar>::New(
+    tmp<surfaceInterpolationScheme<vector> > tinterpScheme(
+           surfaceInterpolationScheme<vector>::New(
                    mesh_,
                    mesh_.schemesDict().interpolationScheme(vf_.name())
            )
     );
-    const surfaceInterpolationScheme<scalar>& interpolationScheme = tinterpScheme();
+    const surfaceInterpolationScheme<vector>& interpolationScheme = tinterpScheme();
 
-    tmp<surfaceScalarField> tweights = interpolationScheme.weights(mag(vf_));
-    const surfaceScalarField& weights = tweights();
+    tmp<surfaceScalarField> tweights = interpolationScheme.weights(vf_);
+    return tweights();
+
+}
+
+void
+Foam::myImplicitDivScheme::updateCoeffs(){
+
+    // interpolation weights
+    const surfaceScalarField& weights = getWeights();
 
     // reset diag and source
     diag_   = vectorField(mesh_.nCells(), pTraits<vector>::zero);
@@ -43,12 +50,13 @@ Foam::myImplicitDivScheme::updateCoeffs(){
 
             diag_[o] +=  s*w;
             diag_[n] -=  s*(1-w);
-            lower_[i] = -s*w;
             upper_[i] =  s*(1-w);
+            lower_[i] = -s*w;
+
         }
     //}
 
-    // CONTRIBUTION BOUNDARY FIELD ...      (update coeffs in solver!!!)
+    // CONTRIBUTION BOUNDARY FIELD ...
     //
     //      vf_boundFace = ic * vf_boundCell  +  bc
 
@@ -60,8 +68,8 @@ Foam::myImplicitDivScheme::updateCoeffs(){
 
         tmp<Field<vector> > tic = patchVolField.valueInternalCoeffs(weightsPatchVolField);
         tmp<Field<vector> > tbc = patchVolField.valueBoundaryCoeffs(weightsPatchVolField);
-        const Field<vector> ic = tic();     // internal coefficient
-        const Field<vector> bc = tbc();     // boundary coefficient
+        const Field<vector>& ic = tic();     // internal coefficient
+        const Field<vector>& bc = tbc();     // boundary coefficient
 
         const fvPatch& patch = patchVolField.patch();   // reference to patch
 
@@ -72,15 +80,18 @@ Foam::myImplicitDivScheme::updateCoeffs(){
 
             label c = patch.faceCells()[faceI];
 
-            diag_[c]   += Vector<scalar>(ic[faceI].x() * sn[faceI].x(),
-                                         ic[faceI].y() * sn[faceI].y(),
-                                         ic[faceI].z() * sn[faceI].z());
+            diag_[c]   += cmptMultiply(ic[faceI],sn[faceI]);
             source_[c] -= bc[faceI] & sn[faceI];
 
         }
 
     }
-
+    /*
+    diag_ = vector(1,1,1);
+    upper_ = vector(2,2,2);
+    lower_ = vector(3,3,3);
+    source_ = 4;
+    */
 }
 
 const vectorField&

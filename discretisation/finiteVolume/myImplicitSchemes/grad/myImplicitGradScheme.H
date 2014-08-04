@@ -14,6 +14,7 @@ private:
     vectorField upper_;
     vectorField lower_;
     vectorField source_;
+    const surfaceScalarField getWeights();
 
 public:
     myImplicitGradScheme(volScalarField&);

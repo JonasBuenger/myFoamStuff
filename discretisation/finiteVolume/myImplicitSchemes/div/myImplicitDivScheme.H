@@ -10,12 +10,12 @@ class myImplicitDivScheme{
 private:
     volVectorField& vf_;
     const fvMesh& mesh_;
-    //surfaceInterpolationScheme<scalar> interpolationScheme_;
     bool upToDate_;
     vectorField diag_;
     vectorField upper_;
     vectorField lower_;
     scalarField source_;
+    const surfaceScalarField getWeights();
 
 public:
     myImplicitDivScheme(volVectorField&);

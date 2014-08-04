@@ -18,9 +18,10 @@ solvers
 {
     block_sT
     {
-        solver           GMRES; //BiCGStab;
+        //solver           BiCGStab;
+        solver           GMRES;
         preconditioner   Cholesky;
-	nDirections	 5;
+        nDirections	 5;
 
         tolerance        1e-09;
         relTol           0.01;
@@ -32,7 +33,7 @@ solvers
 
 SIMPLE
 {
-    nNonOrthogonalCorrectors 0;
+    nNonOrthogonalCorrectors 10;
 }
 
 PISO
@@ -43,10 +44,5 @@ PISO
     pRefValue       0;
 }
 
-relaxationFactors
-{
-    T    0.9;
-    Ts   0.9;
-}
 
 // ************************************************************************* //

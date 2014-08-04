@@ -682,6 +682,7 @@ testImplicit.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/setRootCase.H
 testImplicit.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createTime.H
 testImplicit.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createMesh.H
 testImplicit.dep: createFields.H
+testImplicit.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readSIMPLEControls.H
 $(OBJECTS_DIR)/testImplicit.o: $(EXE_DEP)
 $(OBJECTS_DIR)/testImplicit.o:
 	@SOURCE_DIR=.
