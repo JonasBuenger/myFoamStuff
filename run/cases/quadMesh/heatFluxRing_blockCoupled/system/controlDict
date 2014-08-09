@@ -14,7 +14,6 @@ FoamFile
     object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-libs ("myHeatFlux.so");
 
 application     artComp;
 
@@ -24,9 +23,9 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         10;
+endTime         20;
 
-deltaT          0.1;
+deltaT          0.2;
 
 writeControl    runTime;
 

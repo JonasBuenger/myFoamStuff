@@ -14,19 +14,19 @@ Foam::myImplicitDivScheme::myImplicitDivScheme(volVectorField& vf):
    updateCoeffs();
 }
 
-const surfaceScalarField Foam::myImplicitDivScheme::getWeights(){
+tmp<surfaceScalarField> Foam::myImplicitDivScheme::getWeights(){
 
     // interpolation scheme
-    tmp<surfaceInterpolationScheme<vector> > tinterpScheme(
-           surfaceInterpolationScheme<vector>::New(
+    tmp<surfaceInterpolationScheme<scalar> > tinterpScheme(
+           surfaceInterpolationScheme<scalar>::New(
                    mesh_,
                    mesh_.schemesDict().interpolationScheme(vf_.name())
            )
     );
-    const surfaceInterpolationScheme<vector>& interpolationScheme = tinterpScheme();
+    const surfaceInterpolationScheme<scalar>& interpolationScheme = tinterpScheme();
 
-    tmp<surfaceScalarField> tweights = interpolationScheme.weights(vf_);
-    return tweights();
+    tmp<surfaceScalarField> tweights = interpolationScheme.weights(mag(vf_));
+    return tweights;
 
 }
 
@@ -34,7 +34,8 @@ void
 Foam::myImplicitDivScheme::updateCoeffs(){
 
     // interpolation weights
-    const surfaceScalarField& weights = getWeights();
+    tmp<surfaceScalarField> tweights = getWeights();
+    const surfaceScalarField& weights = tweights;
 
     // reset diag and source
     diag_   = vectorField(mesh_.nCells(), pTraits<vector>::zero);
@@ -66,19 +67,18 @@ Foam::myImplicitDivScheme::updateCoeffs(){
         const fvPatchField<vector>& patchVolField = vf_.boundaryField()[patchI];
         const fvsPatchScalarField& weightsPatchVolField = weights.boundaryField()[patchI];  // weight that coeffs get multiplied with
 
-        tmp<Field<vector> > tic = patchVolField.valueInternalCoeffs(weightsPatchVolField);
-        tmp<Field<vector> > tbc = patchVolField.valueBoundaryCoeffs(weightsPatchVolField);
-        const Field<vector>& ic = tic();     // internal coefficient
-        const Field<vector>& bc = tbc();     // boundary coefficient
+        tmp<vectorField > tic = patchVolField.valueInternalCoeffs(weightsPatchVolField);
+        tmp<vectorField > tbc = patchVolField.valueBoundaryCoeffs(weightsPatchVolField);
+        const vectorField& ic = tic();     // internal coefficient
+        const vectorField& bc = tbc();     // boundary coefficient
 
         const fvPatch& patch = patchVolField.patch();   // reference to patch
 
-        tmp<vectorField> tsn = patch.Sf();
-        const vectorField sn = tsn();   // patch normals
+        const vectorField& sn = patch.Sf();   // patch normals
 
         forAll(patchVolField, faceI){ // loop all faces
 
-            label c = patch.faceCells()[faceI];
+            const label c = patch.faceCells()[faceI];
 
             diag_[c]   += cmptMultiply(ic[faceI],sn[faceI]);
             source_[c] -= bc[faceI] & sn[faceI];

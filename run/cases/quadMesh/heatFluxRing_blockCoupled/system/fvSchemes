@@ -27,11 +27,13 @@ gradSchemes
 
 divSchemes
 {
+    default     Gauss linear;
     div(s)      Gauss linear;
 }
 
 laplacianSchemes
 {
+    default     Gauss linear corrected;
     laplacian(nu,s) Gauss linear corrected;//orthogonal;
 }
 

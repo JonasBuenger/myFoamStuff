@@ -15,7 +15,7 @@ private:
     vectorField upper_;
     vectorField lower_;
     scalarField source_;
-    const surfaceScalarField getWeights();
+    tmp<surfaceScalarField> getWeights();
 
 public:
     myImplicitDivScheme(volVectorField&);

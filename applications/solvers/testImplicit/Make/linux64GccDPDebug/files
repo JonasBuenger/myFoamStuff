@@ -31,8 +31,8 @@
 # 2 "<command-line>" 2
 # 1 "files"
 testImplicit.C
-$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.C
 $(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.C
 $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.C
 $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad/myImplicitGradScheme.C
 

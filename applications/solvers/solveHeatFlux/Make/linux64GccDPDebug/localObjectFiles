@@ -1,0 +1,4 @@
+LOCAL_OBJECTS = \
+solveHeatFlux.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o

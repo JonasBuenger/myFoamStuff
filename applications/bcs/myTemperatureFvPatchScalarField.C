@@ -151,9 +151,11 @@ void Foam::myTemperatureFvPatchScalarField::updateCoeffs()
     }
 
     scalarField& boundaryTheta = *this;
+
     const volScalarField& Theta = db().lookupObject<volScalarField>("Theta");
-    const vectorField ThetaGradient = fvc::grad(Theta,"leastSquares");          // klären, wie gradient-methode festgelegt werden kann
-    const vectorField& patchDeltas = patch().delta();     // cell-centre to face-centre vector
+    const vectorField ThetaGradient = fvc::grad(Theta);          // klären, wie gradient-methode festgelegt werden kann
+    tmp<vectorField> tpatchDeltas = patch().delta();
+    const vectorField& patchDeltas = tpatchDeltas();
 
     for(int i=0; i<patch().size(); i++){
         boundaryTheta[i] = Theta[patch().faceCells()[i]]

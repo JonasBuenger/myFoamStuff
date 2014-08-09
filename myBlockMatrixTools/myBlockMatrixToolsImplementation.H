@@ -398,14 +398,15 @@ template<class BlockType>
 void insertVectorEquation
 (
     const direction firstEqn,
-    const fvVectorMatrix& m,
+    fvVectorMatrix& m,
     BlockLduMatrix<BlockType>& blockM,
     Field<BlockType>& blockX,
     Field<BlockType>& blockB
 )
 {
-    // matrix components are scalars --> noncoupled
+
     if(m.hasDiag()){
+        m.addBoundaryDiag(m.diag(),0);
         const scalarField& diag = m.diag();
         insertDiag  (firstEqn+0, diag,  blockM);
         insertDiag  (firstEqn+1, diag,  blockM);
@@ -417,17 +418,16 @@ void insertVectorEquation
         insertUpper (firstEqn+1, upper, blockM);
         insertUpper (firstEqn+2, upper, blockM);
     }
-    if(m.hasLower()){
+    if(m.hasLower() || ( m.symmetric() && m.hasUpper() )){
         const scalarField& lower = m.lower();
         insertLower (firstEqn+0, lower, blockM);
         insertLower (firstEqn+1, lower, blockM);
         insertLower (firstEqn+2, lower, blockM);
     }
-
+    m.addBoundarySource(m.source(),false);
     insertSource(firstEqn+0, m.source().component(0),blockB);
     insertSource(firstEqn+1, m.source().component(1),blockB);
     insertSource(firstEqn+2, m.source().component(2),blockB);
-
 }
 
 template<class BlockType>

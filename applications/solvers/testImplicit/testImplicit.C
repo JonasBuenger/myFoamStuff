@@ -35,15 +35,16 @@ Description
 \*---------------------------------------------------------------------------*/
 
 #include "fvCFD.H"
-#include "fieldTypes.H"
-#include "Time.H"
-#include "fvMesh.H"
 
-#include "blockLduSolvers.H"
 #include "VectorNFieldTypes.H"
 #include "volVectorNFields.H"
+
+#include "blockLduSolvers.H"
+
 #include "blockVectorNMatrices.H"
+
 #include "blockMatrixTools.H"
+
 #include "myBlockMatrixTools.H"
 
 #include "myImplicitSchemes.H"
@@ -62,7 +63,7 @@ int main(int argc, char *argv[])
 
     Info<< "\nCalculating heat transport\n" << endl;
 
-    for (runTime++; !runTime.end(); runTime++)
+    while(runTime.loop()) //for (runTime++; !runTime.end(); runTime++)
     {
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
@@ -106,7 +107,7 @@ int main(int argc, char *argv[])
             // HEAT TRANSFER ...
 
             // generate first part using standard FOAM-ext
-            s.boundaryField().updateCoeffs();
+
             fvVectorMatrix sEqn
             (
                   fvm::ddt(s)
@@ -131,11 +132,23 @@ int main(int argc, char *argv[])
             // CONTINUITY EQUATION ...
 
             // generate first part using standard FOAM-ext
-            Theta.boundaryField().updateCoeffs();
+            //Theta.boundaryField().updateCoeffs();
+
+            tmp<volScalarField> tA = sEqn.A();
+            volScalarField& A = tA();
+
+            tmp<volVectorField> texp = fvc::grad(Theta);
+            volVectorField& exp = texp();
+            tmp<volVectorField> texp2 = exp/A;
+            volVectorField exp2 = texp2();
+
             fvScalarMatrix ThetaEqn
             (
                   (1/beta) *
                   fvm::ddt(Theta)
+            //    - fvm::laplacian(1/A, Theta)
+            //      ==
+            //    - fvc::div(exp2)
             //  + fvc::div(s)
             //    == 0
             );
@@ -150,7 +163,6 @@ int main(int argc, char *argv[])
                                              sDiv.coeffsLower(),
                                              sDiv.coeffsSource(),
                                              blockM, blockB);
-
 
             /**************************************************************
              * SOLVE SYSTEM
@@ -171,23 +183,24 @@ int main(int argc, char *argv[])
              * RETRIEVE SOLUTION
              *************************************************************/
 
-            tmp<scalarField> tsx = s.internalField().component(0);
-            tmp<scalarField> tsy = s.internalField().component(1);
-            tmp<scalarField> tsz = s.internalField().component(2);
-            scalarField& sx = tsx();
-            scalarField& sy = tsy();
-            scalarField& sz = tsz();
+            scalarField sx(s.internalField().size(),pTraits<scalar>::zero);
+            scalarField sy(s.internalField().size(),pTraits<scalar>::zero);
+            scalarField sz(s.internalField().size(),pTraits<scalar>::zero);
+
             blockMatrixTools::blockRetrieve(0, sx, block_sT);
             blockMatrixTools::blockRetrieve(1, sy, block_sT);
             blockMatrixTools::blockRetrieve(2, sz, block_sT);
+
             s.internalField().replace(0,sx);
             s.internalField().replace(1,sy);
             s.internalField().replace(2,sz);
 
             blockMatrixTools::blockRetrieve(3, Theta.internalField(), block_sT);
 
-            s.correctBoundaryConditions();
-            Theta.correctBoundaryConditions();
+            // Theta.relax();
+
+            s.correctBoundaryConditions();              // ruft evaluate() --> updated_ = false auf
+            Theta.correctBoundaryConditions();;         // ruft evaluate() --> updated_ = false auf
 
         }
 

@@ -63,12 +63,12 @@ Foam::myImplicitGradScheme::updateCoeffs(){
     forAll(vf_.boundaryField(), patchI){ // loop all patches
 
         const fvPatchField<scalar>& patchVolField = vf_.boundaryField()[patchI];
-        const fvsPatchScalarField& weightsPatchVolField = weights.boundaryField()[patchI];  // weight that coeffs get multiplied with
+        const fvsPatchScalarField& weightsPatchVolField = weights.boundaryField()[patchI];  // weight that coeffs get multiplied with (uniform 1)
 
-        tmp<Field<scalar> > tic = patchVolField.valueInternalCoeffs(weightsPatchVolField);
-        tmp<Field<scalar> > tbc = patchVolField.valueBoundaryCoeffs(weightsPatchVolField);
-        const Field<scalar>& ic = tic();     // internal coefficient
-        const Field<scalar>& bc = tbc();     // boundary coefficient
+        tmp<scalarField > tic = patchVolField.valueInternalCoeffs(weightsPatchVolField);
+        tmp<scalarField > tbc = patchVolField.valueBoundaryCoeffs(weightsPatchVolField);
+        const scalarField& ic = tic();     // internal coefficient
+        const scalarField& bc = tbc();     // boundary coefficient
 
         const fvPatch& patch = patchVolField.patch();   // reference to patch
 

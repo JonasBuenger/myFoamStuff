@@ -77,6 +77,7 @@ myHeatFluxFvPatchVectorField
 }
 
 
+
 Foam::myHeatFluxFvPatchVectorField::
 myHeatFluxFvPatchVectorField
 (
@@ -196,8 +197,12 @@ void Foam::myHeatFluxFvPatchVectorField::updateCoeffs()
     scalarField boundaryTheta = internalTheta.boundaryField()[patchID];
 
     const volScalarField& Theta = db().lookupObject<volScalarField>("Theta");
-    const vectorField ThetaGradient = fvc::grad(internalTheta,"leastSquares");          // klären, wie gradient-methode festgelegt werden kann
-    const vectorField& patchDeltas = patch().delta();     // cell-centre to face-centre vector
+    tmp<volVectorField> tThetaGradient = fvc::grad(internalTheta);
+    const volVectorField ThetaGradient = tThetaGradient();
+    //const vectorField ThetaGradient = fvc::grad(internalTheta,"leastSquares");          // klären, wie gradient-methode festgelegt werden kann
+    tmp<vectorField> tpatchDeltas = patch().delta();
+    const vectorField& patchDeltas = tpatchDeltas();
+
 
     for(int i=0; i<patch().size(); i++){
         boundaryTheta[i] = Theta[patch().faceCells()[i]]
@@ -210,7 +215,8 @@ void Foam::myHeatFluxFvPatchVectorField::updateCoeffs()
     vector e1(1,0,0);
     vector e2(0,1,0);
     vector e3(0,0,1);
-    vectorField sc = this->patchInternalField();
+    tmp<vectorField> tsc = this->patchInternalField();
+    vectorField sc = tsc();
     scalarField d = 1.0/this->patch().deltaCoeffs();
     gt  = ( (g0 ^ n) & e3 );
     sct = ( (sc ^ n) & e3 );
@@ -219,7 +225,8 @@ void Foam::myHeatFluxFvPatchVectorField::updateCoeffs()
     // gesamter Wärmestrom s
     s = sn*n + st*t;
 
-    fixedValueFvPatchVectorField::updateCoeffs();
+    fixedValueFvPatchVectorField::updateCoeffs();     // updated_ = true
+
 }
 
 //---------------------------------------------------------------------------//

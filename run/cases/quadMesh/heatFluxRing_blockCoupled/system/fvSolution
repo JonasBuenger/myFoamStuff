@@ -20,8 +20,9 @@ solvers
     {
         //solver           BiCGStab;
         solver           GMRES;
+        //solver           AMG;
         preconditioner   Cholesky;
-        nDirections	 5;
+        nDirections	 1;
 
         tolerance        1e-09;
         relTol           0.01;
@@ -33,7 +34,7 @@ solvers
 
 SIMPLE
 {
-    nNonOrthogonalCorrectors 10;
+    nNonOrthogonalCorrectors 3;
 }
 
 PISO
