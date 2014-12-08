@@ -1,0 +1,6 @@
+DEPENDENCIES = \
+$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/momentumTransportMatrix.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myPressureFvPatchScalarField.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/mySigmaFvPatchSymmTensorField.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myVelocityFvPatchVectorField.dep\
+momentumTransport.dep

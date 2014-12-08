@@ -1,0 +1,5 @@
+LOCAL_OBJECTS = \
+heatTransportMatrix.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o\
+heatTransport.o

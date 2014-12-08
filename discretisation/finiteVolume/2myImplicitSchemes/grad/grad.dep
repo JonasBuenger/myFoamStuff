@@ -1,0 +1,6 @@
+$(OBJECTS_DIR)/grad.o: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad/grad.dep
+/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad/grad.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad/grad.C
+$(OBJECTS_DIR)/grad.o: $(EXE_DEP)
+$(OBJECTS_DIR)/grad.o:
+	@SOURCE_DIR=/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad
+	SOURCE=/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad/grad.C ; $(Ctoo)

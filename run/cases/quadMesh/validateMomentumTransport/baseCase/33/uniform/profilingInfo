@@ -1,0 +1,82 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:  3.0                                   |
+|   \\  /    A nd           | Web:         http://www.extend-project.de       |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       regIOobject;
+    location    "33/uniform";
+    object      profilingInfo;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+profilingInfo
+(
+
+    {
+        id              6;
+        parentId        4;
+        description     "Foam::Time::writeObject - outputTime";
+        calls           33;
+        totalTime       0.241672;
+        childTime       0;
+        onStack         1;
+    }
+
+    {
+        id              4;
+        parentId        1;
+        description     "Foam::Time::writeObject";
+        calls           66;
+        totalTime       0.242935;
+        childTime       0.241672;
+        onStack         1;
+    }
+
+    {
+        id              1;
+        description     "application::main";
+        calls           1;
+        totalTime       8.42638;
+        childTime       0.243525;
+        onStack         1;
+    }
+
+    {
+        id              3;
+        parentId        2;
+        description     "functionObjectList::read";
+        calls           1;
+        totalTime       2.7e-05;
+        childTime       0;
+        onStack         0;
+    }
+
+    {
+        id              5;
+        parentId        1;
+        description     "functionObjects_.execute()";
+        calls           65;
+        totalTime       0.000514;
+        childTime       0;
+        onStack         0;
+    }
+
+    {
+        id              2;
+        parentId        1;
+        description     "functionObjects_.start()";
+        calls           1;
+        totalTime       7.6e-05;
+        childTime       2.7e-05;
+        onStack         0;
+    }
+);
+
+
+// ************************************************************************* //

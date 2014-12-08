@@ -1,0 +1,11 @@
+include heatTransport.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep
+include $(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/myHeatTransportMatrix.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/div.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/Sp/Sp.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad/grad.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/ddt/ddt.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/laplacian/laplacian.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.dep
+include $(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad/myImplicitGradScheme.dep

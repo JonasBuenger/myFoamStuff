@@ -1,0 +1,12 @@
+LOCAL_OBJECTS = \
+heatTransport.o\
+myHeatFluxFvPatchVectorField.o\
+myTemperatureFvPatchScalarField.o\
+myHeatTransportMatrix.o\
+div.o\
+Sp.o\
+grad.o\
+ddt.o\
+laplacian.o\
+myImplicitDivScheme.o\
+myImplicitGradScheme.o

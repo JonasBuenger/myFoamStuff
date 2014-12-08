@@ -1,0 +1,99 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+pri 0.2;
+pra 1.0;
+mri -0.2;
+mra -1.0;
+psra 0.707106781187;
+psri 0.141421356237;
+msra -0.707106781187;
+msri -0.141421356237;
+
+tang 10;
+rad 15;
+//p 20;
+dz 0.1;
+
+vertices
+(
+    ($pri 	0		0)		// 0
+    (0 		$pri 	0)		// 1
+    ($mri	0		0)		// 2
+    ($pra 	0		0)		// 3
+    (0 		$pra 	0)		// 4
+    ($mra	0		0)		// 5
+    ($pri 	0		$dz)		// 6 
+    (0 		$pri 	$dz)		// 7
+    ($mri	0		$dz)		// 8
+    ($pra 	0		$dz)		// 9
+    (0 		$pra 	$dz)		// 10
+    ($mra	0		$dz)		// 11
+);
+
+blocks
+(
+    hex (0 3 4 1 6 9 10 7) ($tang $rad 1) simpleGrading (1 1 1)
+    hex (1 4 5 2 7 10 11 8) ($tang $rad 1) simpleGrading (1 1 1)
+    //hex (2 6 7 3 10 14 15 11) ($tang $rad 1) simpleGrading (1 1 1)
+    //hex (3 7 4 0 11 15 12 8) ($tang $rad 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+    arc 1 0 	($psri		$psri 		0)		// 0
+    arc 3 4 	($psra 		$psra			0)		// 1
+    arc 7 6 	($psri		$psri 		$dz)	// 2
+    arc 9 10 	($psra 		$psra 		$dz)	// 3
+	 arc 1 2 	($msri		$psri 		0)		// 4
+    arc 4 5 	($msra 		$psra			0)		// 5
+    arc 7 8 	($msri		$psri 		$dz)	// 6
+    arc 10 11 	($msra 		$psra 		$dz)	// 7
+);
+
+patches
+(    
+	 empty frontAndBack
+    (
+       	(9 10 7 6)
+       	(4 1 0 3)
+			(10 11 8 7)
+			(4 1 2 5)
+    )   
+	 symmetryPlane symm
+	 (
+			(9 3 0 6)
+			(8 2 5 11)
+	 )
+    patch in
+    (
+       	(0 6 7 1)
+			(1 7 8 2)
+    )
+    patch out
+    (
+			(5 4 10 11)
+       	(9 3 4 10)
+    )
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

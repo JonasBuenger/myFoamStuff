@@ -1,0 +1,4 @@
+$(OBJECTS_DIR)/blockCoupledScalarTransportFoam.o: $(EXE_DEP)
+$(OBJECTS_DIR)/blockCoupledScalarTransportFoam.o:
+	@SOURCE_DIR=.
+	SOURCE=blockCoupledScalarTransportFoam.C ; $(Ctoo)

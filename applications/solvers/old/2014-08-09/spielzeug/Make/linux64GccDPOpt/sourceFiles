@@ -1,0 +1,4 @@
+SOURCE = \
+solveHeatFlux.C\
+myTemperatureFvPatchScalarField.C\
+myHeatFluxFvPatchVectorField.C

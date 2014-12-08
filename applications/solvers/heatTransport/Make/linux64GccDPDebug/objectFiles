@@ -1,0 +1,5 @@
+OBJECTS = \
+$(OBJECTS_DIR)/heatTransportMatrix.o\
+$(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o\
+$(OBJECTS_DIR)/heatTransport.o

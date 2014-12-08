@@ -1,0 +1,44 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.7.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volSymmTensorField;
+    object      sigma;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform (0 0 0 0 0 0);
+
+boundaryField
+{
+    cavity
+    {
+            //type zeroGradient;
+            type        mySigma;
+            ThetaWall   0;
+            value       uniform (0 0 0 0 0 0);
+    }
+    lid
+    {
+            //type zeroGradient;
+            //type        mySigma;
+            //ThetaWall   0;
+            type        fixedValue;
+            value       (0.1 -0.3 0 -0.1 0 0);
+    }
+    frontAndBack
+    {
+       type            empty;
+    }
+}
+
+// ************************************************************************* //

@@ -24,7 +24,7 @@ boundaryField
     {    
         type      	myHeatFlux;
         alpha	  	1;
-  	Theta_wall	1;
+  	ThetaWall	1;
 	gamma		1;
 	g0		(0 0 0);
 	value		uniform (0 0 0);
@@ -33,7 +33,7 @@ boundaryField
     {
         type            myHeatFlux;
         alpha	        1;
-	Theta_wall	4;
+	ThetaWall	4;
 	gamma		1;
 	g0		(0 0 0);
 	value		uniform (0 0 0);

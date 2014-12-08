@@ -1,0 +1,12 @@
+OBJECTS = \
+$(OBJECTS_DIR)/heatTransport.o\
+$(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o\
+$(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/myHeatTransportMatrix.o\
+$(OBJECTS_DIR)/div.o\
+$(OBJECTS_DIR)/Sp.o\
+$(OBJECTS_DIR)/grad.o\
+$(OBJECTS_DIR)/ddt.o\
+$(OBJECTS_DIR)/laplacian.o\
+$(OBJECTS_DIR)/myImplicitDivScheme.o\
+$(OBJECTS_DIR)/myImplicitGradScheme.o

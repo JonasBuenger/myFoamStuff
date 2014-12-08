@@ -1,0 +1,24 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Kn              Kn      [ 0 0 0 0 0 0 0 ] 0.1; // gleich 1 gesetzt
+epsilonL        epsilonL [ 0 0 0 0 0 0 0 ] 0.1; // Faktor Diffusion-Stabilisierung U
+epsilonLR       epsilonLR [ 0 0 0 0 0 0 0 ] 1; // Faktor Diffusion-Stabilisierung U
+epsilonSigma    epsilonSigma [ 0 0 0 0 0 0 0 ] 0; // Faktor Diffusion-Stabilisierung U
+divSigma    divSigma [ 0 0 0 0 0 0 0 ] -1; // Faktor Diffusion-Stabilisierung U
+
+// ************************************************************************* //

@@ -1,0 +1,5 @@
+/home/jonas/foam/jonas-3.0/applications/solvers/solveHeatFlux_blockCoupled
+/home/jonas/foam/foam-extend-3.0/src/foam/lnInclude
+/home/jonas/foam/foam-extend-3.0/src/finiteVolume/lnInclude
+/home/jonas/foam/jonas-3.0/applications/bcs
+

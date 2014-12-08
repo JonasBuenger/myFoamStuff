@@ -1,0 +1,6 @@
+include $(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/momentumTransportMatrix.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitPressureFvPatchScalarField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/mySigmaFvPatchSymmTensorField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myVelocityFvPatchVectorField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitVelocity/myImplicitVelocityFvPatchVectorField.dep
+include momentumTransport.dep

@@ -1,0 +1,6 @@
+LOCAL_OBJECTS = \
+blockCoupledSolverPU.o\
+myHeatFluxFvPatchVectorField.o\
+myTemperatureFvPatchScalarField.o\
+myImplicitDivScheme.o\
+myImplicitGradScheme.o

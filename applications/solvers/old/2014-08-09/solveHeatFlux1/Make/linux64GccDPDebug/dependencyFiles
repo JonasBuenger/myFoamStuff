@@ -1,0 +1,4 @@
+DEPENDENCIES = \
+solveHeatFlux.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/1/myTemperatureFvPatchScalarField.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/1/myHeatFluxFvPatchVectorField.dep

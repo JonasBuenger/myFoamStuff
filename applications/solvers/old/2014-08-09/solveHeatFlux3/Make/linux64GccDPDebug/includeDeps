@@ -1,0 +1,6 @@
+include solveHeatFlux.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/3/myTemperatureFvPatchScalarField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/3/myHeatFluxFvPatchVectorField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/3/approximations4ThetaAtBoundary.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/3/equalizationBasis.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/3/MyMatrixFunctions.dep

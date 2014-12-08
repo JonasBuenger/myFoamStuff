@@ -1,0 +1,10 @@
+solveHeatFlux.C
+
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/myTemperatureFvPatchScalarField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/myHeatFluxFvPatchVectorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/approximations4ThetaAtBoundary.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/equalizationBasis.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/3/MyMatrixFunctions.C
+
+EXE = $(FOAM_USER_APPBIN)/solveHeatFlux3
+

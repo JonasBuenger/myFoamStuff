@@ -1,0 +1,40 @@
+# 1 "files"
+# 1 "<command-line>"
+
+
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+
+# 17 "/usr/include/stdc-predef.h" 3 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2 "<command-line>" 2
+# 1 "files"
+$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/momentumTransportMatrix.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitPressureFvPatchScalarField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/mySigmaFvPatchSymmTensorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/myVelocityFvPatchVectorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitVelocity/myImplicitVelocityFvPatchVectorField.C
+momentumTransport.C
+
+EXE = $(FOAM_USER_APPBIN)/momentumTransport

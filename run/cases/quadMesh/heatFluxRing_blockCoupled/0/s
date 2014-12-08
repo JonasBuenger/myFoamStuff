@@ -16,27 +16,31 @@ FoamFile
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform (0 0 0);
+internalField   uniform (1 0 0);
 
 boundaryField
 {
     up
     {
-        type      	myHeatFlux;
-        alpha	  	uniform 1;
-        Theta_wall	uniform 1;
-        gamma		uniform 1;
-        g0		uniform (0 0 0);
-        value		uniform (0 0 0);
+        type            fixedValue;
+        value           uniform (1 0 0);
+        //type      	myHeatFlux;
+        //alpha			uniform 1;
+        //Theta_wall	uniform 1;
+        //gamma			uniform 1;
+        //g0				uniform (0 0 0);
+        //value			uniform (0 0 0);
     }
     hole
     {
-        type            myHeatFlux;
-        alpha	        uniform 1;
-        Theta_wall	uniform 4;
-        gamma		uniform 1;
-        g0		uniform (30 0 0);
-        value		uniform (0 0 0);
+        type            fixedValue;
+        value           uniform (0 0 0);
+        //type         myHeatFlux;
+        //alpha	      uniform 1;
+        //Theta_wall	uniform 4;
+        //gamma			uniform 1;
+        //g0				uniform (0 0 0);
+        //value			uniform (0 0 0);
     }
     frontAndBack
     {

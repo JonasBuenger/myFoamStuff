@@ -23,7 +23,7 @@ profilingInfo
         parentId        9;
         description     "Foam::Time::writeObject - outputTime";
         calls           3;
-        totalTime       0.10275;
+        totalTime       0.076772;
         childTime       0;
         onStack         1;
     }
@@ -33,8 +33,8 @@ profilingInfo
         parentId        1;
         description     "Foam::Time::writeObject";
         calls           600;
-        totalTime       0.106497;
-        childTime       0.10275;
+        totalTime       0.080993;
+        childTime       0.076772;
         onStack         1;
     }
 
@@ -42,8 +42,8 @@ profilingInfo
         id              1;
         description     "application::main";
         calls           1;
-        totalTime       2.10956;
-        childTime       0.48704;
+        totalTime       2.16937;
+        childTime       0.459551;
         onStack         1;
     }
 
@@ -52,7 +52,7 @@ profilingInfo
         parentId        2;
         description     "functionObjectList::read";
         calls           1;
-        totalTime       3.3e-05;
+        totalTime       2.9e-05;
         childTime       0;
         onStack         0;
     }
@@ -62,7 +62,7 @@ profilingInfo
         parentId        1;
         description     "functionObjects_.execute()";
         calls           599;
-        totalTime       0.002351;
+        totalTime       0.002207;
         childTime       0;
         onStack         0;
     }
@@ -72,8 +72,8 @@ profilingInfo
         parentId        1;
         description     "functionObjects_.start()";
         calls           1;
-        totalTime       0.000115;
-        childTime       3.3e-05;
+        totalTime       0.000112;
+        childTime       2.9e-05;
         onStack         0;
     }
 
@@ -82,8 +82,8 @@ profilingInfo
         parentId        1;
         description     "fvMatrix::solve_Theta";
         calls           600;
-        totalTime       0.040447;
-        childTime       0.007694;
+        totalTime       0.039849;
+        childTime       0.007789;
         onStack         0;
     }
 
@@ -92,8 +92,8 @@ profilingInfo
         parentId        1;
         description     "fvMatrix::solve_s";
         calls           600;
-        totalTime       0.33763;
-        childTime       0.243884;
+        totalTime       0.33639;
+        childTime       0.245324;
         onStack         0;
     }
 
@@ -102,7 +102,7 @@ profilingInfo
         parentId        7;
         description     "lduMatrix::solver_Theta";
         calls           600;
-        totalTime       0.007694;
+        totalTime       0.007789;
         childTime       0;
         onStack         0;
     }
@@ -112,7 +112,7 @@ profilingInfo
         parentId        4;
         description     "lduMatrix::solver_sx";
         calls           600;
-        totalTime       0.124444;
+        totalTime       0.124429;
         childTime       0;
         onStack         0;
     }
@@ -122,7 +122,7 @@ profilingInfo
         parentId        4;
         description     "lduMatrix::solver_sy";
         calls           600;
-        totalTime       0.11944;
+        totalTime       0.120895;
         childTime       0;
         onStack         0;
     }

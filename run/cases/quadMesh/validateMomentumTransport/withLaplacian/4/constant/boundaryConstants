@@ -1,0 +1,29 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      boundaryConstants;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// wesentlich sind alpha und gamma (?)
+
+alpha1      alpha1 [ 0 0 0 0 0 0 0 ] 1;          // - 1   * beta * P
+alpha2      alpha2 [ 0 0 0 0 0 0 0 ] 1;          // - 2   * beta * P
+beta1       beta1  [ 0 0 0 0 0 0 0 ] 1;         // - 1/5 * beta
+beta2       beta2  [ 0 0 0 0 0 0 0 ] 1;         // - 1/2 * beta * Theta
+gamma1      gamma1 [ 0 0 0 0 0 0 0 ] 1;         //   7/5 * beta * P
+gamma2      gamma2 [ 0 0 0 0 0 0 0 ] 1;        // - 11/5 * Theta
+delta1      delta1 [ 0 0 0 0 0 0 0 ] 1;          //   2/5 * beta * P
+delta2      delta2 [ 0 0 0 0 0 0 0 ] 1;          // - 1   * beta * P * Theta
+
+// ************************************************************************* //

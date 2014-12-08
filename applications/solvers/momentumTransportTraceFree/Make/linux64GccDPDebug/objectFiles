@@ -1,0 +1,6 @@
+OBJECTS = \
+$(OBJECTS_DIR)/momentumTransportTraceFreeMatrix.o\
+$(OBJECTS_DIR)/myPressureFvPatchScalarField.o\
+$(OBJECTS_DIR)/mySigmaFvPatchSymmTensorField.o\
+$(OBJECTS_DIR)/myVelocityFvPatchVectorField.o\
+$(OBJECTS_DIR)/momentumTransportTraceFree.o

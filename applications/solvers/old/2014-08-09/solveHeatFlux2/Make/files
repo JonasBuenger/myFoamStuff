@@ -1,0 +1,8 @@
+solveHeatFlux.C
+
+$(WM_PROJECT_USER_DIR)/applications/bcs/2/myTemperatureFvPatchScalarField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/2/myHeatFluxFvPatchVectorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/2/interpolateThetaAtBoundary.C
+
+EXE = $(FOAM_USER_APPBIN)/solveHeatFlux2
+

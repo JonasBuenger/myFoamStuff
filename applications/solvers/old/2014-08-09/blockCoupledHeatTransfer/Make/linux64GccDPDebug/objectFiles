@@ -1,0 +1,5 @@
+OBJECTS = \
+$(OBJECTS_DIR)/blockCoupledHeatTransfer.o\
+$(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o\
+$(OBJECTS_DIR)/myImplicitDivScheme.o

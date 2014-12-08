@@ -1,0 +1,7 @@
+OBJECTS = \
+$(OBJECTS_DIR)/solveHeatFlux.o\
+$(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
+$(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o\
+$(OBJECTS_DIR)/approximations4ThetaAtBoundary.o\
+$(OBJECTS_DIR)/equalizationBasis.o\
+$(OBJECTS_DIR)/MyMatrixFunctions.o

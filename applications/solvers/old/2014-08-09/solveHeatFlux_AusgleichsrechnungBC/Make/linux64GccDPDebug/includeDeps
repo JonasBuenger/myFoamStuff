@@ -1,0 +1,6 @@
+include artComp.dep
+include myTemperatureFvPatchScalarField.dep
+include myHeatFluxFvPatchVectorField.dep
+include equalizationBasis.dep
+include MyMatrixFunctions.dep
+include approximations4ThetaAtBoundary.dep

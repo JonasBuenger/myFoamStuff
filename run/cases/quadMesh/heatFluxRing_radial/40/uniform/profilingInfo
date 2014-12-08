@@ -19,22 +19,22 @@ profilingInfo
 (
 
     {
-        id              9;
-        parentId        7;
+        id              11;
+        parentId        9;
         description     "Foam::Time::writeObject - outputTime";
         calls           1;
-        totalTime       0.00332;
+        totalTime       0.071882;
         childTime       0;
         onStack         1;
     }
 
     {
-        id              7;
+        id              9;
         parentId        1;
         description     "Foam::Time::writeObject";
         calls           400;
-        totalTime       0.005241;
-        childTime       0.00332;
+        totalTime       0.073428;
+        childTime       0.071882;
         onStack         1;
     }
 
@@ -42,8 +42,8 @@ profilingInfo
         id              1;
         description     "application::main";
         calls           1;
-        totalTime       2.14277;
-        childTime       0.263647;
+        totalTime       3.76193;
+        childTime       0.99932;
         onStack         1;
     }
 
@@ -58,11 +58,11 @@ profilingInfo
     }
 
     {
-        id              8;
+        id              10;
         parentId        1;
         description     "functionObjects_.execute()";
         calls           399;
-        totalTime       0.002272;
+        totalTime       0.001985;
         childTime       0;
         onStack         0;
     }
@@ -72,8 +72,18 @@ profilingInfo
         parentId        1;
         description     "functionObjects_.start()";
         calls           1;
-        totalTime       5e-05;
+        totalTime       5.1e-05;
         childTime       1.2e-05;
+        onStack         0;
+    }
+
+    {
+        id              7;
+        parentId        1;
+        description     "fvMatrix::solve_Theta";
+        calls           400;
+        totalTime       0.044385;
+        childTime       0.009428;
         onStack         0;
     }
 
@@ -82,8 +92,18 @@ profilingInfo
         parentId        1;
         description     "fvMatrix::solve_s";
         calls           400;
-        totalTime       0.256084;
-        childTime       0.141631;
+        totalTime       0.879471;
+        childTime       0.768055;
+        onStack         0;
+    }
+
+    {
+        id              8;
+        parentId        7;
+        description     "lduMatrix::solver_Theta";
+        calls           400;
+        totalTime       0.009428;
+        childTime       0;
         onStack         0;
     }
 
@@ -92,7 +112,7 @@ profilingInfo
         parentId        4;
         description     "lduMatrix::solver_sx";
         calls           400;
-        totalTime       0.072325;
+        totalTime       0.375724;
         childTime       0;
         onStack         0;
     }
@@ -102,7 +122,7 @@ profilingInfo
         parentId        4;
         description     "lduMatrix::solver_sy";
         calls           400;
-        totalTime       0.069306;
+        totalTime       0.392331;
         childTime       0;
         onStack         0;
     }

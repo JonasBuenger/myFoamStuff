@@ -1,0 +1,5 @@
+DEPENDENCIES = \
+$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/heatTransportMatrix.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep\
+heatTransport.dep

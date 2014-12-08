@@ -1,0 +1,114 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+pri 0.5;
+pra 2.0;
+mri -0.5;
+mra -2.0;
+psra 1.41421356237;
+psri 0.353553390593;
+msra -1.41421356237;
+msri -0.353553390593;
+
+tang 4;
+rad 5;
+//p 20;
+dz 0.1;
+
+vertices
+(
+    ($pri 	0		0)		// 0
+    (0 		$pri 	0)		// 1
+    ($mri	0		0)		// 2
+    (0 		$mri	0)		// 3 
+    ($pra 	0		0)		// 4
+    (0 		$pra 	0)		// 5
+    ($mra	0		0)		// 6
+    (0 		$mra	0)		// 7 
+    ($pri 	0		$dz)		// 8
+    (0 		$pri 	$dz)		// 9
+    ($mri	0		$dz)		// 10
+    (0 		$mri	$dz)		// 11
+    ($pra 	0		$dz)		// 12
+    (0 		$pra 	$dz)		// 13
+    ($mra	0		$dz)		// 14
+    (0 		$mra	$dz)		// 15 
+);
+
+blocks
+(
+    hex (0 4 5 1 8 12 13 9) ($tang $rad 1) simpleGrading (1 1 1)
+    hex (1 5 6 2 9 13 14 10) ($tang $rad 1) simpleGrading (1 1 1)
+    hex (2 6 7 3 10 14 15 11) ($tang $rad 1) simpleGrading (1 1 1)
+    hex (3 7 4 0 11 15 12 8) ($tang $rad 1) simpleGrading (1 1 1)
+);
+
+edges
+(
+    arc 1 0 	($psri		$psri 		0)
+    arc 4 5 	($psra 		$psra	 	0)
+    arc 8 9 	($psri		$psri 		$dz)
+    arc 12 13 	($psra 		$psra 		$dz)
+    arc 1 2 	($msri		$psri 		0)
+    arc 5 6 	($msra 		$psra	 	0)
+    arc 9 10 	($msri		$psri 		$dz)
+    arc 13 14 	($msra 		$psra 		$dz)
+    arc 2 3 	($msri		$msri 		0)
+    arc 6 7 	($msra 		$msra	 	0)
+    arc 10 11 	($msri		$msri 		$dz)
+    arc 14 15 	($msra 		$msra 		$dz)
+    arc 3 0 	($psri		$msri 		0)
+    arc 7 4 	($psra 		$msra	 	0)
+    arc 11 8 	($psri		$msri 		$dz)
+    arc 15 12 	($psra 		$msra		$dz)
+);
+
+patches
+(   
+    wall up
+    (
+       	(5 4 12 13)
+	(6 5 13 14)
+	(7 6 14 15)
+	(4 7 15 12)
+    )
+    wall hole
+    (
+       	(0 1 9 8)
+	(1 2 10 9)
+	(2 3 11 10)
+	(3 0 8 11)
+    )
+    empty frontAndBack
+    (
+       	(0 4 5 1)
+       	(13 12 8 9)
+	(1 5 6 2)
+	(9 10 14 13)
+	(2 6 7 3)
+	(10 11 15 14)
+	(0 3 7 4)
+	(8 12 15 11)
+    )
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

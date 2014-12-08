@@ -1,0 +1,8 @@
+/home/jonas/foam/foam-extend-3.0/src/VectorN/lnInclude
+/home/jonas/foam/foam-extend-3.0/src/foam/lnInclude
+/home/jonas/foam/foam-extend-3.0/src/finiteVolume/lnInclude
+/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes
+/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div
+/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/grad
+/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/curl
+/home/jonas/foam/jonas-3.0/myBlockMatrixTools

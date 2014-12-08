@@ -1,0 +1,82 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     3.0                                |
+|   \\  /    A nd           | Web:         http://www.extend-project.de       |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    blockX
+    {
+        //solver BiCGStab;
+        solver GMRES;
+        //solver AMG;
+
+        tolerance 1e-06;
+        relTol 0.01;
+
+        minIter 1;
+        maxIter 15;
+        nDirections 10;
+		
+//      preconditioner{
+//          preconditioner GaussSeidel;
+//          nSweeps 2;
+//      }
+//      preconditioner{
+//          preconditioner none;
+//      }
+//        preconditioner{
+//            preconditioner diagonal;
+//        }
+      preconditioner{
+          preconditioner Cholesky;
+      }
+//      preconditioner{
+//          preconditioner BlockAMG;
+//          cycle W-cycle; //V, F
+//          nPreSweeps 1;
+//          nPostSweeps 1;
+//          nMaxLevels 2;
+//          scale off;
+//          coarseningType AAMG;
+//          groupSize 10;      // number of equations to merge
+//          minCoarseEqns 5;
+//          scaleCorrection true;
+//          smoother GaussSeidel; //ILU
+//          norm twoNorm;
+//          mergeLevels 1;
+//          tolerance 1e-05;
+//          relTol 0.01;
+//          minIter 1;
+//          maxIter 10;
+//      }
+
+    }
+}
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 0;
+}
+
+PISO
+{
+    nCorrectors     2;
+    nNonOrthogonalCorrectors 0;
+    pRefCell        0;
+    pRefValue       0;
+}
+
+
+// ************************************************************************* //

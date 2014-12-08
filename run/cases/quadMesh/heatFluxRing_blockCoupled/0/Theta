@@ -22,14 +22,16 @@ boundaryField
 {
     up
     {
-        	//type  fixedValue; 
-			type  myTemperature;
+                //type  fixedValue;
+                        //type  implicitExtrapolation;
+                        type  myTemperature;
 			value uniform 1;
     }
     hole
     {
         	//type  fixedValue; 
-			type  myTemperature;
+                        //type  implicitExtrapolation;
+                        type  myTemperature;
 			value uniform 4;
     }
     frontAndBack

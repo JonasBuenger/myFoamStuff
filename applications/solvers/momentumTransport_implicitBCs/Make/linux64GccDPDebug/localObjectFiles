@@ -1,0 +1,7 @@
+LOCAL_OBJECTS = \
+momentumTransportMatrix.o\
+myImplicitPressureFvPatchScalarField.o\
+mySigmaFvPatchSymmTensorField.o\
+myVelocityFvPatchVectorField.o\
+myImplicitVelocityFvPatchVectorField.o\
+momentumTransport.o

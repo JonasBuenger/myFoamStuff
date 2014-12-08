@@ -79,11 +79,7 @@ class myHeatFluxFvPatchVectorField
     public fixedValueFvPatchVectorField
 {
     // Private data
-
-        scalarField alpha;
-        scalarField Theta_wall;
-        scalarField gamma;
-        vectorField g0;
+        scalarField ThetaWall;
 
 public:
 

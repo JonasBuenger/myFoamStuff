@@ -1,0 +1,6 @@
+$(OBJECTS_DIR)/div.o: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div/div.dep
+/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div/div.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div/div.C
+$(OBJECTS_DIR)/div.o: $(EXE_DEP)
+$(OBJECTS_DIR)/div.o:
+	@SOURCE_DIR=/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div
+	SOURCE=/home/jonas/foam/jonas-3.0/discretisation/finiteVolume/myImplicitSchemes/div/div.C ; $(Ctoo)

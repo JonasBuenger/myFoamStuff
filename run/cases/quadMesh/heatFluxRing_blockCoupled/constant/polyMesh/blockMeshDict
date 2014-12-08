@@ -16,10 +16,14 @@ FoamFile
 
 convertToMeters 1;
 
-pri 0.5;
-pra 2.0;
-mri -0.5;
-mra -2;
+pri 0.2;
+pra 1.0;
+mri -0.2;
+mra -1.0;
+psra 0.707106781187;
+psri 0.141421356237;
+msra -0.707106781187;
+msri -0.141421356237;
 
 tang 10;
 rad 10;
@@ -28,21 +32,21 @@ dz 0.1;
 
 vertices
 (
-    ($pri 	0 	0)		// 0
+    ($pri 	0		0)		// 0
     (0 		$pri 	0)		// 1
-    ($mri	0	0)		// 2
+    ($mri	0		0)		// 2
     (0 		$mri	0)		// 3 
-    ($pra 	0 	0)		// 4
+    ($pra 	0		0)		// 4
     (0 		$pra 	0)		// 5
-    ($mra	0	0)		// 6
+    ($mra	0		0)		// 6
     (0 		$mra	0)		// 7 
-    ($pri 	0 	$dz)		// 8
+    ($pri 	0		$dz)		// 8
     (0 		$pri 	$dz)		// 9
-    ($mri	0	$dz)		// 10
+    ($mri	0		$dz)		// 10
     (0 		$mri	$dz)		// 11
-    ($pra 	0 	$dz)		// 12
+    ($pra 	0		$dz)		// 12
     (0 		$pra 	$dz)		// 13
-    ($mra	0	$dz)		// 14
+    ($mra	0		$dz)		// 14
     (0 		$mra	$dz)		// 15 
 );
 
@@ -56,22 +60,22 @@ blocks
 
 edges
 (
-    arc 1 0 	(0.353553 		0.353553 		0)
-    arc 4 5 	(1.41421356 		1.41421356	 	0)
-    arc 8 9 	(0.353553 		0.353553 		$dz)
-    arc 12 13 	(1.41421356 		1.41421356 		$dz)
-    arc 1 2 	(-0.353553 		0.353553 		0)
-    arc 5 6 	(-1.41421356 		1.41421356	 	0)
-    arc 9 10 	(-0.353553 		0.353553 		$dz)
-    arc 13 14 	(-1.41421356 		1.41421356 		$dz)
-    arc 2 3 	(-0.353553 		-0.353553 		0)
-    arc 6 7 	(-1.41421356 		-1.41421356	 	0)
-    arc 10 11 	(-0.353553 		-0.353553 		$dz)
-    arc 14 15 	(-1.41421356 		-1.41421356 		$dz)
-    arc 3 0 	(0.353553 		-0.353553 		0)
-    arc 7 4 	(1.41421356 		-1.41421356	 	0)
-    arc 11 8 	(0.353553 		-0.353553 		$dz)
-    arc 15 12 	(1.41421356 		-1.41421356		$dz)
+    arc 1 0 	($psri		$psri 		0)
+    arc 4 5 	($psra 		$psra	 	0)
+    arc 8 9 	($psri		$psri 		$dz)
+    arc 12 13 	($psra 		$psra 		$dz)
+    arc 1 2 	($msri		$psri 		0)
+    arc 5 6 	($msra 		$psra	 	0)
+    arc 9 10 	($msri		$psri 		$dz)
+    arc 13 14 	($msra 		$psra 		$dz)
+    arc 2 3 	($msri		$msri 		0)
+    arc 6 7 	($msra 		$msra	 	0)
+    arc 10 11 	($msri		$msri 		$dz)
+    arc 14 15 	($msra 		$msra 		$dz)
+    arc 3 0 	($psri		$msri 		0)
+    arc 7 4 	($psra 		$msra	 	0)
+    arc 11 8 	($psri		$msri 		$dz)
+    arc 15 12 	($psra 		$msra		$dz)
 );
 
 patches

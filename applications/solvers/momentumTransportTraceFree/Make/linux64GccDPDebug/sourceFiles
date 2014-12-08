@@ -1,0 +1,6 @@
+SOURCE = \
+$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/momentumTransportTraceFreeMatrix.C\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myPressureFvPatchScalarField.C\
+$(WM_PROJECT_USER_DIR)/applications/bcs/mySigmaFvPatchSymmTensorField.C\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myVelocityFvPatchVectorField.C\
+momentumTransportTraceFree.C

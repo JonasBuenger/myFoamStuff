@@ -1,0 +1,4 @@
+SOURCE = \
+spielzeug.C\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.C\
+$(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.C

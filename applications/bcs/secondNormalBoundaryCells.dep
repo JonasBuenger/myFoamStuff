@@ -1,0 +1,6 @@
+$(OBJECTS_DIR)/secondNormalBoundaryCells.o: /home/jonas/foam/jonas-3.0/applications/bcs/secondNormalBoundaryCells.dep
+/home/jonas/foam/jonas-3.0/applications/bcs/secondNormalBoundaryCells.dep: /home/jonas/foam/jonas-3.0/applications/bcs/secondNormalBoundaryCells.C
+$(OBJECTS_DIR)/secondNormalBoundaryCells.o: $(EXE_DEP)
+$(OBJECTS_DIR)/secondNormalBoundaryCells.o:
+	@SOURCE_DIR=/home/jonas/foam/jonas-3.0/applications/bcs
+	SOURCE=/home/jonas/foam/jonas-3.0/applications/bcs/secondNormalBoundaryCells.C ; $(Ctoo)

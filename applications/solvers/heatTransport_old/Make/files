@@ -1,0 +1,13 @@
+heatTransport.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.C
+$(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.C
+$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/myHeatTransportMatrix.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/div.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/Sp/Sp.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad/grad.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/ddt/ddt.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/laplacian/laplacian.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div/myImplicitDivScheme.C
+$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad/myImplicitGradScheme.C
+
+EXE = $(FOAM_USER_APPBIN)/heatTransport

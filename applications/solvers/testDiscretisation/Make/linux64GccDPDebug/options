@@ -1,0 +1,36 @@
+# 1 "options"
+# 1 "<command-line>"
+
+
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+
+# 17 "/usr/include/stdc-predef.h" 3 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2 "<command-line>" 2
+# 1 "options"
+EXE_INC =     -ftemplate-depth-130     -I$(WM_PROJECT_USER_DIR)/applications/solvers/testDiscretisation/vector1     -I$(WM_PROJECT_USER_DIR)/applications/solvers/testDiscretisation/vector3     -I$(WM_PROJECT_USER_DIR)/applications/solvers/testDiscretisation/vector6     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/ddt     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/div     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/grad     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/laplacian     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/Sp     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/useful     -I$(FOAM_SRC)/finiteVolume/lnInclude     -I$(FOAM_SRC)/sampling/lnInclude     -I$(LIB_SRC)/VectorN/lnInclude
+# 16 "options"
+
+EXE_LIBS =     -lfiniteVolume     -lsampling     -lVectorN

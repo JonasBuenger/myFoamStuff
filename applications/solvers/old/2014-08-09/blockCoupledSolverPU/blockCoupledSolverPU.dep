@@ -1,0 +1,10 @@
+$(OBJECTS_DIR)/blockCoupledSolverPU.o: blockCoupledSolverPU.dep
+blockCoupledSolverPU.dep: blockCoupledSolverPU.C
+blockCoupledSolverPU.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/setRootCase.H
+blockCoupledSolverPU.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createTime.H
+blockCoupledSolverPU.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createMesh.H
+blockCoupledSolverPU.dep: createFields.H
+$(OBJECTS_DIR)/blockCoupledSolverPU.o: $(EXE_DEP)
+$(OBJECTS_DIR)/blockCoupledSolverPU.o:
+	@SOURCE_DIR=.
+	SOURCE=blockCoupledSolverPU.C ; $(Ctoo)

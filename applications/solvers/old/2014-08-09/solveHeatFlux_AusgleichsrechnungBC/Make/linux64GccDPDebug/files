@@ -1,0 +1,11 @@
+# 1 "files"
+# 1 "<Kommandozeile>"
+# 1 "files"
+artComp.C
+myTemperatureFvPatchScalarField.C
+myHeatFluxFvPatchVectorField.C
+equalizationBasis.C
+MyMatrixFunctions.C
+approximations4ThetaAtBoundary.C
+
+EXE = $(FOAM_APPBIN)/solveHeatFlux_Ausgleichsrechnung

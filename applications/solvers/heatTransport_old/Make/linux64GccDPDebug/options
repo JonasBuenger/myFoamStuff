@@ -1,0 +1,36 @@
+# 1 "options"
+# 1 "<command-line>"
+
+
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+
+# 17 "/usr/include/stdc-predef.h" 3 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 2 "<command-line>" 2
+# 1 "options"
+EXE_INC =     -ftemplate-depth-100     -I$(WM_PROJECT_USER_DIR)/applications/bcs     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/div     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/ddt     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/grad     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/myImplicitSchemes/curl     -I$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/     -I$(WM_PROJECT_USER_DIR)/blockMatrix/tools/     -I$(WM_PROJECT_USER_DIR)/blockMatrix/subMatrix/     -I$(FOAM_SRC)/finiteVolume/lnInclude     -I$(FOAM_SRC)/sampling/lnInclude     -I$(LIB_SRC)/VectorN/lnInclude
+# 15 "options"
+
+EXE_LIBS =     -lfiniteVolume     -lsampling     -lVectorN

@@ -1,0 +1,5 @@
+LOCAL_OBJECTS = \
+blockCoupledHeatTransfer.o\
+myTemperatureFvPatchScalarField.o\
+myHeatFluxFvPatchVectorField.o\
+myImplicitDivScheme.o

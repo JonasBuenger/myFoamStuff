@@ -64,4 +64,3 @@
 
     label ThetaRefCell = 0;
     scalar ThetaRefValue = 0.0;
-    setRefCell(Theta, mesh.solutionDict().subDict("PISO"), ThetaRefCell, ThetaRefValue);

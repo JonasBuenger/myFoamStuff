@@ -1,0 +1,7 @@
+SOURCE = \
+artComp.C\
+myTemperatureFvPatchScalarField.C\
+myHeatFluxFvPatchVectorField.C\
+equalizationBasis.C\
+MyMatrixFunctions.C\
+approximations4ThetaAtBoundary.C

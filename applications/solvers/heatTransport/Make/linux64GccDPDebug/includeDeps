@@ -1,0 +1,4 @@
+include $(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/heatTransportMatrix.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep
+include $(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep
+include heatTransport.dep
