@@ -151,7 +151,7 @@ void Foam::myPressureFvPatchScalarField::updateCoeffs()
     scalarField& boundaryField = *this;
 
     const volScalarField& p = db().lookupObject<volScalarField>("p");
-    const vectorField pGradient = fvc::grad(p);          // klären, wie gradient-methode festgelegt werden kann
+    const vectorField pGradient = fvc::grad(p);
     tmp<vectorField> tpatchDeltas = patch().delta();
     const vectorField& patchDeltas = tpatchDeltas();
 

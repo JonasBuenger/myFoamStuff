@@ -141,6 +141,7 @@ void Foam::myVelocityFvPatchVectorField::updateCoeffs()
 
     // Variablen/ Felder
     const volVectorField& u = db().lookupObject<volVectorField>("u");
+    const volVectorField& uOld = u.oldTime();
     //fvPatchVectorField& u_b = *this;
     tmp<vectorField> tu_b = *this;
     vectorField& u_b = tu_b();

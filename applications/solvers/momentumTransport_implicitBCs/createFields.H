@@ -40,6 +40,9 @@
         mesh
     );
 
+    volVectorField& U = u;
+    #   include "createPhi.H"
+
     Info<< "Reading field p\n" << endl;
     volScalarField p
     (
@@ -84,7 +87,8 @@
        mesh,
        dimensionedVector10("zero", dimless, vector10::zero)
     );
-    */
-    //label ThetaRefCell = 0;
-    //scalar ThetaRefValue = 0.0;
-    //setRefCell(Theta, mesh.solutionDict().subDict("PISO"), ThetaRefCell, ThetaRefValue);
+*/
+    label pRefCell = 0;
+    scalar pRefValue = 0.0;
+    setRefCell(p, mesh.solutionDict().subDict("PISO"), pRefCell, pRefValue);
+

@@ -44,7 +44,7 @@ Description
 #include "vector10/blockVector10Matrix.H"
 #include "vector10.H"
 #include "tensor10.H"
-#include "../../../discretisation/finiteVolume/myFvm.H"
+#include "../../../discretisation/finiteVolume/implicit/myFvm.H"
 #include "../../../blockMatrix/myBlockMatrices/momentumTransportMatrix.H"
 
 
@@ -58,6 +58,8 @@ int main(int argc, char *argv[])
 #   include "createMesh.H"
 #   include "createFields.H"
 
+#   include "initContinuityErrs.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     #include "writeCellCenters.H"
@@ -67,25 +69,33 @@ int main(int argc, char *argv[])
 
     momentumTransportMatrix momTrans(mesh, u, p, sigma);
 
+    bool updateOnlyRHS = false;
+
+    momTrans.updateMatrix(updateOnlyRHS);
+
+    updateOnlyRHS = true;
+
     while(runTime.loop()) //for (runTime++; !runTime.end(); runTime++)
     {
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
 #       include "readSIMPLEControls.H"
+#       include "readPISOControls.H"
+
+        momTrans.updateMatrix(updateOnlyRHS);
 
         for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
         {
-
-            momTrans.updateMatrix();
 
             momTrans.solve();
 
             momTrans.updateFields();
 
+            momTrans.writeToFile();
         }
 
         runTime.write();
-        //Info << "tr(sigma[15]): " << tr(sigma[15]) << endl;
+
     }
 
     Info<< "End\n" << endl;
