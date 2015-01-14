@@ -199,11 +199,11 @@ void Foam::myHeatFluxFvPatchVectorField::updateCoeffs()
     const volScalarField& Theta = db().lookupObject<volScalarField>("Theta");
     const scalarField& ThetaBoundary = Theta.boundaryField()[patch().index()];
 
-    const volSymmTensorField& sigma = db().lookupObject<volSymmTensorField>("sigma");
-    const symmTensorField& sigmaBoundary = sigma.boundaryField()[patch().index()];
+    //const volSymmTensorField& sigma = db().lookupObject<volSymmTensorField>("sigma");
+    //const symmTensorField& sigmaBoundary = sigma.boundaryField()[patch().index()];
 
-    const volVectorField& u = db().lookupObject<volVectorField>("u");
-    const vectorField& uBoundary = u.boundaryField()[patch().index()];
+    //const volVectorField& u = db().lookupObject<volVectorField>("u");
+    //const vectorField& uBoundary = u.boundaryField()[patch().index()];
 
     vectorField& sBoundary = *this;
     tmp<vectorField> tsPatchInternalField = this->patchInternalField();
@@ -214,7 +214,7 @@ void Foam::myHeatFluxFvPatchVectorField::updateCoeffs()
     scalarField d = 1.0/this->patch().deltaCoeffs();
 
 
-
+/*
     // NORMAL HEATFLUX: sn
     scalarField sn =    alpha2.value() * (ThetaBoundary - ThetaWall)
                        + beta2.value() * ( normals & (sigmaBoundary & normals) );
@@ -231,14 +231,34 @@ void Foam::myHeatFluxFvPatchVectorField::updateCoeffs()
 
     // RESULTING HEATFLUX ...
     sBoundary = sn * normals + st1 * tangents1 + st2 * tangents2;
+*/
+
+    vector g0(0,0,0);
+    if(this->patch().name() == "hole")
+        g0 = vector(100,0,0);
+
+/*
+    scalarField st1 = (     ( sPatchInternalField & tangents1 ) - ( d * delta2.value() * (g0 & tangents1) )     )
+                         /
+                            ( 1 + delta2.value() * d );
+*/
+
+    scalarField sn = alpha2.value() * (ThetaBoundary - ThetaWall);
 
 
 
+    vector e1(1,0,0);
+    vector e2(0,1,0);
+    vector e3(0,0,1);
+    tmp<vectorField> tsc = this->patchInternalField();
+    vectorField& sc = tsc();
 
+    scalarField gt  = ( (g0 ^ normals) & e3 );
+    scalarField sct = ( (sc ^ normals) & e3 );
 
+    scalarField st1 = ( sct - d*gt ) / ( 1 + d );
 
-
-
+    sBoundary = sn * normals + st1 * tangents1;
 
 
 

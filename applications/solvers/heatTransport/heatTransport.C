@@ -44,7 +44,8 @@ Description
 #include "vector4/blockVector4Matrix.H"
 #include "vector4.H"
 #include "tensor4.H"
-#include "../../../discretisation/finiteVolume/myFvm.H"
+#include "../../../discretisation/finiteVolume/implicit/myFvm.H"
+//#include "../../../discretisation/finiteVolume/myFvm.H"
 #include "../../../blockMatrix/myBlockMatrices/heatTransportMatrix.H"
 
 
@@ -63,6 +64,9 @@ int main(int argc, char *argv[])
 
     Info<< "\nCalculating momentum transport\n" << endl;
 
+    #include "writeCellCenters.H"
+    #include "writeVolumes.H"
+
     heatTransportMatrix heatTrans(mesh, s, Theta);
 
     while(runTime.loop()) //for (runTime++; !runTime.end(); runTime++)
@@ -74,39 +78,33 @@ int main(int argc, char *argv[])
         for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
         {
 
+/*
+            // Update s
+            fvVectorMatrix sEqn
+            (
+                 fvm::ddt(s)
+               - fvm::laplacian(nu/2,s)
+               + corrDim*s
+            );
+
+            solve(sEqn == -fvc::grad(Theta));
+
+            // Update Theta
+            fvScalarMatrix ThetaEqn
+            (
+                 fvm::ddt(Theta)
+            );
+            solve(ThetaEqn == -fvc::div(s));
+
+            // Output
+            runTime.write();
+
+            Info << "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+                 << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+                 << nl << endl;
+*/
+
             heatTrans.updateMatrix();
-
-            //momTrans.displayBlock(55);
-
-            //momTrans.displayCurrVal(56);
-
-            /*
-            tmp<volTensorField> tgradU = fvc::grad(u);
-            volTensorField gradU = tgradU();
-
-            Info << gradU.internalField()[56] << endl;
-
-            tmp<volVectorField> tlaplacianSigma = fvc::div(sigma);
-            volVectorField& laplacianSigma = tlaplacianSigma();
-
-            Info << laplacianSigma.internalField()[56] << endl;
-
-            tmp<volTensorField> tgradU = fvc::grad(u);
-            volTensorField gradU = tgradU();
-
-            Info << gradU.internalField()[56] << endl;
-
-            tmp<volVectorField> tgradP = fvc::grad(p);
-            volVectorField& gradP = tgradP();
-
-            Info << gradP.internalField()[56] << endl;
-
-            tmp<volScalarField> tdivU = fvc::div(u);
-            volScalarField divU = tdivU();
-
-            Info << divU.internalField()[56] << endl;
-            */
-
 
             heatTrans.solve();
 

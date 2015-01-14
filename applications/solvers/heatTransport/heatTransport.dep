@@ -690,24 +690,14 @@ heatTransport.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/blockVectorNMatrices.H
 heatTransport.dep: $(WM_PROJECT_DIR)/src/VectorN/lnInclude/blockMatrixTools.H
 heatTransport.dep: $(WM_PROJECT_DIR)/src/VectorN/lnInclude/blockMatrixTools.C
 heatTransport.dep: vector4/blockVector4Matrix.H
-heatTransport.dep: ../../../discretisation/finiteVolume/myFvm.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/ddt/ddt.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/ddt/ddt.C
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/Sp/Sp.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/Sp/Sp.C
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/grad/grad.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/grad/grad.C
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/ddt/../useful/interpolationWeights.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/useful/interpolationWeights.C
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/laplacian/laplacian.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/laplacian/laplacian.C
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/div/div.H
-heatTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/traceFree/traceFree.H
+heatTransport.dep: ../../../discretisation/finiteVolume/implicit/myFvm.H
 heatTransport.dep: ../../../blockMatrix/myBlockMatrices/heatTransportMatrix.H
 heatTransport.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/setRootCase.H
 heatTransport.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createTime.H
 heatTransport.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/createMesh.H
 heatTransport.dep: createFields.H
+heatTransport.dep: writeCellCenters.H
+heatTransport.dep: writeVolumes.H
 heatTransport.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readSIMPLEControls.H
 $(OBJECTS_DIR)/heatTransport.o: $(EXE_DEP)
 $(OBJECTS_DIR)/heatTransport.o:

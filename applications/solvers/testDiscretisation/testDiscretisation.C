@@ -43,7 +43,7 @@ Description
 #include "blockMatrixTools.H"
 #include "BlockSolverPerformance.H"
 
-#include "../../../discretisation/finiteVolume/myFvm.H"
+#include "../../../discretisation/finiteVolume/implicit/myFvm.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

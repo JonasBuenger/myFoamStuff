@@ -35,42 +35,68 @@ void gaussLaplacian(volScalarField& vf, const scalar f, BlockLduMatrix<vectorTyp
     }
 
 }
-
+/*
 template<class vectorType>
-void gaussLaplacian(volScalarField& vf, const scalarField f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
+void gaussLaplacian(volVectorField& vf, scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
+
 
     typename CoeffField<vectorType>::squareTypeField& diag = M.diag().asSquare();
     typename CoeffField<vectorType>::squareTypeField& upper = M.upper().asSquare();
     typename CoeffField<vectorType>::squareTypeField& lower = M.lower().asSquare();
 
-    Foam::fvScalarMatrix m = fvm::laplacian(vf);
+    Foam::fvVectorMatrix m = fvm::laplacian(vf);
     m.addBoundaryDiag(m.diag(),0);
     m.addBoundarySource(m.source(),false);
 
-    const labelList o = vf.mesh().owner();
-    const labelList n = vf.mesh().neighbour();
+    //f = f*2;
 
     if (!updateOnlyRHS){
 
         forAll(m.diag(), i){
-            diag[i](dirI, dirJ) += f[i]*m.diag()[i];
+            diag[i](dirI+0, dirJ+0) += f*m.diag()[i];
+            diag[i](dirI+1, dirJ+1) += f*m.diag()[i];
+            diag[i](dirI+2, dirJ+2) += f*m.diag()[i];
         }
 
         forAll(m.upper(), i){
-            upper[i](dirI, dirJ) += f[n[i]]*m.upper()[i];
+            upper[i](dirI+0, dirJ+0) += f*m.upper()[i];
+            upper[i](dirI+1, dirJ+1) += f*m.upper()[i];
+            upper[i](dirI+2, dirJ+2) += f*m.upper()[i];
         }
 
         forAll(m.lower(), i){
-            lower[i](dirI, dirJ) += f[o[i]]*m.lower()[i];
+            lower[i](dirI+0, dirJ+0) += f*m.lower()[i];
+            lower[i](dirI+1, dirJ+1) += f*m.lower()[i];
+            lower[i](dirI+2, dirJ+2) += f*m.lower()[i];
         }
 
     }
 
     forAll(m.source(), i){
-        B[i](dirI) += f[i]*m.source()[i];
+        B[i](dirI+0) += f*m.source()[i].x();
+        B[i](dirI+1) += f*m.source()[i].y();
+        B[i](dirI+2) += f*m.source()[i].z();
     }
 
+
+    tmp<volVectorField> tlaplacianS = fvc::laplacian(vf);
+    volVectorField& laplacianS = tlaplacianS();
+    //blockMatrixTools::blockAdd(dirI+0, 0.5 * laplacianS.internalField().component(0), B);
+    //blockMatrixTools::blockAdd(dirI+1, 0.5 * laplacianS.internalField().component(1), B);
+    //blockMatrixTools::blockAdd(dirI+2, 0.5 * laplacianS.internalField().component(2), B);
+
+    vectorField& internalField = laplacianS.internalField();
+
+    forAll(laplacianS.internalField(), i){
+        //B[i](dirI+0) += -0.5*f*internalField[i].component(0);
+        //B[i](dirI+1) += -0.5*f*internalField[i].component(1);
+        //B[i](dirI+2) += -0.5*f*internalField[i].component(2);
+    }
+
+
 }
+*/
+
 
 template<class vectorType>
 void gaussLaplacian(volVectorField& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
@@ -227,6 +253,7 @@ void gaussLaplacian(volVectorField& vf, const scalar f, BlockLduMatrix<vectorTyp
 
 
 }
+
 
 template<class vectorType>
 void gaussLaplacian(volSymmTensorField& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
@@ -406,27 +433,6 @@ void gaussLaplacian(volSymmTensorField& vf, const scalar f, BlockLduMatrix<vecto
             }
         }
 
-
-}
-
-template<class vectorType>
-void gaussLaplacian(volSymmTensorField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
-
-    gaussLaplacian(vf, M, B, 1, dirI, dirJ, updateOnlyRHS);
-
-}
-
-template<class vectorType>
-void gaussLaplacian(volScalarField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
-
-    gaussLaplacian(vf, M, B, 1, dirI, dirJ, updateOnlyRHS);
-
-}
-
-template<class vectorType>
-void gaussLaplacian(volVectorField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false){
-
-    gaussLaplacian(vf, M, B, 1, dirI, dirJ, updateOnlyRHS);
 
 }
 

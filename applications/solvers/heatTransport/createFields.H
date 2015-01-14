@@ -12,13 +12,24 @@
         )
     );
 
+    IOdictionary boundaryConstants
+    (
+        IOobject
+        (
+            "boundaryConstants",
+            runTime.constant(),
+            mesh,
+            IOobject::MUST_READ,
+            IOobject::NO_WRITE
+        )
+    );
+
     dimensionedScalar nu
     (
         transportProperties.lookup("nu")
     );
 
-
-    dimensionedScalar beta 
+    dimensionedScalar beta
     (
         transportProperties.lookup("beta")
     );
