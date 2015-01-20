@@ -3,7 +3,6 @@ linearizedR14Matrix.o\
 myPressureFvPatchScalarField.o\
 mySigmaFvPatchSymmTensorField.o\
 myVelocityFvPatchVectorField.o\
-myImplicitVelocityFvPatchVectorField.o\
 myHeatFluxFvPatchVectorField.o\
 myTemperatureFvPatchScalarField.o\
 linearizedR14.o

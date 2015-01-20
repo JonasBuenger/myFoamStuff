@@ -85,6 +85,14 @@ myTemperatureFvPatchScalarField
 {
 //	Info << "myTemperature-Constructor 3" << endl;
     //fvPatchScalarField::operator=(alpha*patch().nf());
+    if (dict.found("value"))
+    {
+        Info << "found" << endl;
+        fixedValueFvPatchField<scalar>::operator==
+        (
+             Field<scalar>("value", dict, Theta.size())
+        );
+    }
 }
 
 
@@ -158,7 +166,6 @@ void Foam::myTemperatureFvPatchScalarField::updateCoeffs()
 
     for(int i=0; i<patch().size(); i++){
         boundaryTheta[i] = Theta[patch().faceCells()[i]]
-                          //  + ( ThetaGradient[i] & patchDeltas[i] );
                           + ( ThetaGradient[patch().faceCells()[i]] & patchDeltas[i] );
     }
 

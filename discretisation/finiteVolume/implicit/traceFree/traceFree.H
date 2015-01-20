@@ -1,5 +1,5 @@
-#ifndef TRACEFREE_H
-#define TRACEFREE_H
+#ifndef TRACEFREEIMPLICIT_H
+#define TRACEFREEIMPLICIT_H
 
 #include"fvCFD.H"
 
@@ -10,6 +10,6 @@ void traceFree(volSymmTensorField& vf, BlockLduMatrix<vectorType>& M, Field<vect
 
 }
 
-#include "traceFree.C"
+#include "./traceFree.C"
 
 #endif

@@ -3,7 +3,6 @@ $(OBJECTS_DIR)/linearizedR14Matrix.o\
 $(OBJECTS_DIR)/myPressureFvPatchScalarField.o\
 $(OBJECTS_DIR)/mySigmaFvPatchSymmTensorField.o\
 $(OBJECTS_DIR)/myVelocityFvPatchVectorField.o\
-$(OBJECTS_DIR)/myImplicitVelocityFvPatchVectorField.o\
 $(OBJECTS_DIR)/myHeatFluxFvPatchVectorField.o\
 $(OBJECTS_DIR)/myTemperatureFvPatchScalarField.o\
 $(OBJECTS_DIR)/linearizedR14.o

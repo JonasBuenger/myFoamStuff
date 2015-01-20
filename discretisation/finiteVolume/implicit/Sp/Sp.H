@@ -1,5 +1,5 @@
-#ifndef SP_H
-#define SP_H
+#ifndef SPIMPLICIT_H
+#define SPIMPLICIT_H
 
 #include"fvCFD.H"
 
@@ -10,6 +10,6 @@ void Sp(GeometricField<Type, fvPatchField, volMesh>& vf, const scalar f, BlockLd
 
 }
 
-#include "Sp.C"
+#include "./Sp.C"
 
 #endif

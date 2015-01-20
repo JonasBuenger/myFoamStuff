@@ -1,5 +1,5 @@
-#ifndef DDT_H
-#define DDT_H
+#ifndef DDTIMPLICIT_H
+#define DDTIMPLICIT_H
 
 #include "fvCFD.H"
 #include "blockVectorNMatrices.H"
@@ -15,6 +15,6 @@ void ddt(volScalarField& vf, const double f, BlockLduMatrix<vectorType>& M, Fiel
 
 }
 
-#include "ddt.C"
+#include "./ddt.C"
 
 #endif

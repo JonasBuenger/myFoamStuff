@@ -12,8 +12,8 @@ const tmp<surfaceScalarField> interpolWeights(GeometricField<type, fvPatchField,
     const objectRegistry& db = vf.db();
 
     //const volVectorField& u = db.lookupObject<volVectorField>("vc");
-    //const volVectorField& u = db.lookupObject<volVectorField>("u");
-    const volVectorField& u = db.lookupObject<volVectorField>("s");
+    const volVectorField& u = db.lookupObject<volVectorField>("u");
+    //const volVectorField& u = db.lookupObject<volVectorField>("s");
 
     surfaceScalarField phi
     (

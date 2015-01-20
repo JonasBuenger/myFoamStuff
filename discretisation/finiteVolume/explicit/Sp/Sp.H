@@ -3,28 +3,13 @@
 
 #include"fvCFD.H"
 
-namespace myFvm {
+namespace myFvc{
 
-template<class vectorType>
-void Sp(volScalarField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void Sp(volVectorField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void Sp(volSymmTensorField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void Sp(volScalarField& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void Sp(volVectorField& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void Sp(volSymmTensorField& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
+template<class Type, class vectorType>
+void Sp(GeometricField<Type, fvPatchField, volMesh>& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false);
 
 }
 
-#include "Sp.C"
+#include "./Sp.C"
 
 #endif

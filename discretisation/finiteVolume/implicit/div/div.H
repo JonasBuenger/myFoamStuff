@@ -1,5 +1,5 @@
-#ifndef DIV_H
-#define DIV_H
+#ifndef DIVIMPLICIT_H
+#define DIVIMPLICIT_H
 
 #include"fvCFD.H"
 
@@ -25,6 +25,6 @@ void gaussDiv(GeometricField<Type, fvPatchField, volMesh>& vf, const scalar f, B
 
 }
 
-#include"div.C"
+#include "./div.C"
 
 #endif

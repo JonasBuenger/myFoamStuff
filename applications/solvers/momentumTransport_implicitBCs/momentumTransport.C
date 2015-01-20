@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
         Info<< "Time = " << runTime.timeName() << nl << endl;
 
 #       include "readSIMPLEControls.H"
-#       include "readPISOControls.H"
+//#       include "readPISOControls.H"
 
         momTrans.updateMatrix(updateOnlyRHS);
 

@@ -19,7 +19,7 @@ void gaussDiv(GeometricField<Type, fvPatchField, volMesh>& vf, const scalar f, B
     const scalarField volInv = 1/tvol();
 
     int dimBild;
-    int components[3^(Type::rank)/3][3];
+    int components[pow(3,Type::rank)/3][3];
 
     const string fieldType = Type::typeName;
     if (fieldType == "vector"){

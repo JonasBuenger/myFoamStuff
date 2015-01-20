@@ -1,5 +1,5 @@
-#ifndef LAPLACIAN_H
-#define LAPLACIAN_H
+#ifndef LAPLACIANIMPLICIT_H
+#define LAPLACIANIMPLICIT_H
 
 #include"fvCFD.H"
 
@@ -25,6 +25,6 @@ void laplacian(volSymmTensorField& vf, const scalar f, BlockLduMatrix<vectorType
 
 }
 
-#include "laplacian.C"
+#include "./laplacian.C"
 
 #endif

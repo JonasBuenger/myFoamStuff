@@ -81,6 +81,14 @@ myVelocityFvPatchVectorField
 {
 //	Info << "myVelocity-Konstructor 3" << endl;
 //    fvPatchVectorField::operator=(alpha*patch().nf());
+    if (dict.found("value"))
+    {
+        Info << "found" << endl;
+        fixedValueFvPatchField<vector>::operator==
+        (
+             Field<vector>("value", dict, u.size())
+        );
+    }
 }
 
 
@@ -142,7 +150,6 @@ void Foam::myVelocityFvPatchVectorField::updateCoeffs()
     // Variablen/ Felder
     const volVectorField& u = db().lookupObject<volVectorField>("u");
     const volVectorField& uOld = u.oldTime();
-    //fvPatchVectorField& u_b = *this;
     tmp<vectorField> tu_b = *this;
     vectorField& u_b = tu_b();
 
@@ -165,14 +172,9 @@ void Foam::myVelocityFvPatchVectorField::updateCoeffs()
 
         vector u_b_extrapolated = u_bc + (Jac_u & Di);
 
-        // <<!!!>> extrapolation unstabilizes sometimes --> don't use gradient in this case
-        //u_b_extrapolated = u_bc;
-
         u_b[i] = u_b_extrapolated - (u_b_extrapolated & normal) * normal;
 
     }
-
-    //Info << u_b << endl;
 
     fixedValueFvPatchVectorField::updateCoeffs();     // updated_ = true
 

@@ -1,5 +1,5 @@
-#ifndef GRAD_H
-#define GRAD_H
+#ifndef GRADIMPLICIT_H
+#define GRADIMPLICIT_H
 
 #include"fvCFD.H"
 
@@ -16,6 +16,6 @@ void gaussGrad(volVectorField& vf, const scalar f, BlockLduMatrix<vectorType>& M
 
 }
 
-#include "grad.C"
+#include "./grad.C"
 
 #endif

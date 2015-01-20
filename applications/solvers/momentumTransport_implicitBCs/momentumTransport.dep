@@ -692,16 +692,11 @@ momentumTransport.dep: $(WM_PROJECT_DIR)/src/VectorN/lnInclude/blockMatrixTools.
 momentumTransport.dep: vector10/blockVector10Matrix.H
 momentumTransport.dep: ../../../discretisation/finiteVolume/implicit/myFvm.H
 momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/ddt/ddt.H
-momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/ddt/ddt.C
 momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/Sp/Sp.H
-momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/Sp/Sp.C
 momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/grad/grad.H
-momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/grad/grad.C
-momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/ddt/../useful/interpolationWeights.H
-momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/useful/interpolationWeights.C
 momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/laplacian/laplacian.H
-momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/laplacian/laplacian.C
 momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/div/div.H
+momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/gradDiv/gradDiv.H
 momentumTransport.dep: /home/jonas/foam/jonas-3.0/discretisation/finiteVolume/implicit/traceFree/traceFree.H
 momentumTransport.dep: ../../../blockMatrix/myBlockMatrices/momentumTransportMatrix.H
 momentumTransport.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/setRootCase.H
@@ -713,7 +708,6 @@ momentumTransport.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/initContinui
 momentumTransport.dep: writeCellCenters.H
 momentumTransport.dep: writeVolumes.H
 momentumTransport.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readSIMPLEControls.H
-momentumTransport.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readPISOControls.H
 $(OBJECTS_DIR)/momentumTransport.o: $(EXE_DEP)
 $(OBJECTS_DIR)/momentumTransport.o:
 	@SOURCE_DIR=.

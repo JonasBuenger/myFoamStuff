@@ -1,24 +1,15 @@
-#ifndef DIV_H
-#define DIV_H
+#ifndef DIVEXPLICIT_H
+#define DIVEXPLICIT_H
 
 #include"fvCFD.H"
 
-namespace myFvm{
+namespace myFvc{
 
-template<class vectorType>
-void gaussDiv(volVectorField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void gaussDiv(volSymmTensorField& vf, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void gaussDiv(volVectorField& vf, const double f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
-
-template<class vectorType>
-void gaussDiv(volSymmTensorField& vf, const double f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ);
+template<class Type, class vectorType>
+void div(GeometricField<Type, fvPatchField, volMesh>& vf, const scalar f, BlockLduMatrix<vectorType>& M, Field<vectorType>& B, const int dirI, const int dirJ, const bool updateOnlyRHS = false);
 
 }
 
-#include"div.C"
+#include "./div.C"
 
 #endif

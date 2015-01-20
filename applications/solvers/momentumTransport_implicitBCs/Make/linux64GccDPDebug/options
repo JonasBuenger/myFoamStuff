@@ -30,7 +30,7 @@
 
 # 2 "<command-line>" 2
 # 1 "options"
-EXE_INC =     -ftemplate-depth-130     -I$(WM_PROJECT_USER_DIR)/applications/solvers/momentumTransport/vector10     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit     -I$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit/ddt     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit/div     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit/grad     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit/laplacian     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit/Sp     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit/useful     -I$(WM_PROJECT_USER_DIR)/applications/bcs     -I$(WM_PROJECT_USER_DIR)/applications/bcs/implicitExtrapolation     -I$(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitVelocity     -I$(FOAM_SRC)/finiteVolume/lnInclude     -I$(FOAM_SRC)/sampling/lnInclude     -I$(LIB_SRC)/VectorN/lnInclude
-# 18 "options"
+EXE_INC =     -ftemplate-depth-130     -I$(WM_PROJECT_USER_DIR)/applications/solvers/momentumTransport/vector10     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/implicit     -I$(WM_PROJECT_USER_DIR)/discretisation/finiteVolume/explicit     -I$(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices     -I$(WM_PROJECT_USER_DIR)/applications/bcs     -I$(WM_PROJECT_USER_DIR)/applications/bcs/implicitExtrapolation     -I$(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitVelocity     -I$(FOAM_SRC)/finiteVolume/lnInclude     -I$(FOAM_SRC)/sampling/lnInclude     -I$(LIB_SRC)/VectorN/lnInclude
+# 13 "options"
 
 EXE_LIBS =     -lfiniteVolume     -lsampling     -lVectorN

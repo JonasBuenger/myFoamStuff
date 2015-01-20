@@ -37,10 +37,10 @@ mySigmaFvPatchSymmTensorField
     const DimensionedField<symmTensor, volMesh>& iF
 )
 :
-    fixedValueFvPatchSymmTensorField(sigma, iF)//,
-    //ThetaWall(sigma.size())
+    fixedValueFvPatchSymmTensorField(sigma, iF),
+    ThetaWall(sigma.size())
 {
-//	Info << "myVelocity-Konstructor 1" << endl;
+    Info << "mySigma-Konstructor 1" << endl;
 }
 
 
@@ -53,10 +53,10 @@ mySigmaFvPatchSymmTensorField
     const fvPatchFieldMapper& mapper
 )
 :
-    fixedValueFvPatchSymmTensorField(sigma, iF)//,
-    //ThetaWall(ptf.ThetaWall, mapper)
+    fixedValueFvPatchSymmTensorField(ptf, sigma, iF, mapper),
+    ThetaWall(ptf.ThetaWall, mapper)
 {
-//	Info << "myVelocity-Konstructor 2" << endl;
+    Info << "mySigma-Konstructor 2" << endl;
     // Note: calculate product only on ptf to avoid multiplication on
     // unset values in reconstructPar.
  /*  fixedValueFvPatchSymmTensorField::operator=
@@ -80,10 +80,18 @@ mySigmaFvPatchSymmTensorField
     const dictionary& dict
 )
 :
-    fixedValueFvPatchSymmTensorField(sigma, iF)//,
-    //ThetaWall("ThetaWall", dict, sigma.size())
+    fixedValueFvPatchSymmTensorField(sigma, iF),
+    ThetaWall("ThetaWall", dict, sigma.size())
 {
-//	Info << "myVelocity-Konstructor 3" << endl;
+    Info << "mySigma-Konstructor 3" << endl;
+    if (dict.found("value"))
+    {
+        Info << "found" << endl;
+        fixedValueFvPatchField<symmTensor>::operator==
+        (
+             Field<symmTensor>("value", dict, sigma.size())
+        );
+    }
 //    FvPatchSymmTensorField::operator=(alpha*patch().nf());
 }
 
@@ -94,10 +102,10 @@ mySigmaFvPatchSymmTensorField
     const mySigmaFvPatchSymmTensorField& pivpvf
 )
 :
-    fixedValueFvPatchSymmTensorField(pivpvf)//,
-    //ThetaWall(pivpvf.ThetaWall)
+    fixedValueFvPatchSymmTensorField(pivpvf),
+    ThetaWall(pivpvf.ThetaWall)
 {
-//	Info << "myVelocity-Konstructor 4" << endl;
+    Info << "mySigma-Konstructor 4" << endl;
 }
 
 Foam::mySigmaFvPatchSymmTensorField::
@@ -107,10 +115,10 @@ mySigmaFvPatchSymmTensorField
     const DimensionedField<symmTensor, volMesh>& iF
 )
 :
-    fixedValueFvPatchSymmTensorField(pivpvf, iF)//,
-    //ThetaWall(pivpvf.ThetaWall)
+    fixedValueFvPatchSymmTensorField(pivpvf, iF),
+    ThetaWall(pivpvf.ThetaWall)
 {
-//	Info << "myVelocity-Konstructor 5" << endl;
+    Info << "mySigma-Konstructor 5" << endl;
 }
 
 
@@ -122,7 +130,7 @@ void Foam::mySigmaFvPatchSymmTensorField::autoMap
 )
 {
     fixedValueFvPatchSymmTensorField::autoMap(m);
-    //ThetaWall.autoMap(m);
+    ThetaWall.autoMap(m);
 }
 
 
@@ -137,7 +145,7 @@ void Foam::mySigmaFvPatchSymmTensorField::rmap
     const mySigmaFvPatchSymmTensorField& tiptf =
         refCast<const mySigmaFvPatchSymmTensorField>(ptf);
 
-    //ThetaWall.rmap(tiptf.ThetaWall, addr);
+    ThetaWall.rmap(tiptf.ThetaWall, addr);
 }
 
 void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
@@ -193,17 +201,17 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
     const dimensionedScalar delta1(boundaryConstants.lookup("delta1"));
 
     // BOUNDARY FIELDS
-    //const volScalarField& Theta = db().lookupObject<volScalarField>("Theta");
-    //const scalarField& ThetaBoundary = Theta.boundaryField()[patch().index()];
+    const volScalarField& Theta = db().lookupObject<volScalarField>("Theta");
+    const scalarField& ThetaBoundary = Theta.boundaryField()[patch().index()];
 
     const volVectorField& u = db().lookupObject<volVectorField>("u");
     const vectorField& uBoundary = u.boundaryField()[patch().index()];
 
-    //const volVectorField& s = db().lookupObject<volVectorField>("s");
-    //const vectorField& sBoundary = s.boundaryField()[patch().index()];
+    const volVectorField& s = db().lookupObject<volVectorField>("s");
+    const vectorField& sBoundary = s.boundaryField()[patch().index()];
 
-    tmp<volSymmTensorField> tsigmaInternalField = db().lookupObject<volSymmTensorField>("sigma");
-    const volSymmTensorField& sigmaInternalField = tsigmaInternalField();
+    tmp<volSymmTensorField> tsigma = db().lookupObject<volSymmTensorField>("sigma");
+    const volSymmTensorField& sigma = tsigma();
 
     symmTensorField& sigmaBoundary = *this;
     tmp<symmTensorField> tsigmaPatchInternalField = this->patchInternalField();
@@ -217,16 +225,22 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
 
 
     // GRADIENT-FIELD OF SIGMA FOR EXTRAPOLATION
-    const volVectorField  grad_sigmaInternalField_XX = fvc::grad(sigmaInternalField.component(symmTensor::XX));
-    const volVectorField  grad_sigmaInternalField_XY = fvc::grad(sigmaInternalField.component(symmTensor::XY));
-    const volVectorField  grad_sigmaInternalField_XZ = fvc::grad(sigmaInternalField.component(symmTensor::XZ));
-    const volVectorField& grad_sigmaInternalField_YX =      grad_sigmaInternalField_XY;
-    const volVectorField  grad_sigmaInternalField_YY = fvc::grad(sigmaInternalField.component(symmTensor::YY));
-    const volVectorField  grad_sigmaInternalField_YZ = fvc::grad(sigmaInternalField.component(symmTensor::YZ));
-    const volVectorField& grad_sigmaInternalField_ZX =      grad_sigmaInternalField_XZ;
-    const volVectorField& grad_sigmaInternalField_ZY =      grad_sigmaInternalField_YZ;
-    const volVectorField  grad_sigmaInternalField_ZZ = fvc::grad(sigmaInternalField.component(symmTensor::ZZ));
+    tmp<volVectorField> tgrad_sigma_XX = fvc::grad(sigma.component(symmTensor::XX));
+    tmp<volVectorField> tgrad_sigma_XY = fvc::grad(sigma.component(symmTensor::XY));
+    tmp<volVectorField> tgrad_sigma_XZ = fvc::grad(sigma.component(symmTensor::XZ));
+    tmp<volVectorField> tgrad_sigma_YY = fvc::grad(sigma.component(symmTensor::YY));
+    tmp<volVectorField> tgrad_sigma_YZ = fvc::grad(sigma.component(symmTensor::YZ));
+    tmp<volVectorField> tgrad_sigma_ZZ = fvc::grad(sigma.component(symmTensor::ZZ));
 
+    const vectorField& grad_sigma_XX = tgrad_sigma_XX().internalField();
+    const vectorField& grad_sigma_XY = tgrad_sigma_XY().internalField();
+    const vectorField& grad_sigma_XZ = tgrad_sigma_XZ().internalField();
+    const vectorField& grad_sigma_YX = tgrad_sigma_XY().internalField();
+    const vectorField& grad_sigma_YY = tgrad_sigma_YY().internalField();
+    const vectorField& grad_sigma_YZ = tgrad_sigma_YZ().internalField();
+    const vectorField& grad_sigma_ZX = tgrad_sigma_XZ().internalField();
+    const vectorField& grad_sigma_ZY = tgrad_sigma_YZ().internalField();
+    const vectorField& grad_sigma_ZZ = tgrad_sigma_ZZ().internalField();
 
     // SET SIGMA AT BOUNDARY
     forAll(sigmaBoundary, i){
@@ -236,8 +250,9 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
         const vector t1 = tangents1[i];
         const vector t2 = tangents2[i];
         const vector ub = uBoundary[i];
-        //const vector sb = sBoundary[i];
-        //const scalar Thetab = ThetaBoundary[i];
+        const vector sb = sBoundary[i];
+        const scalar Thetab = ThetaBoundary[i];
+        const scalar ThetaW = ThetaWall[i];
 
         tensor T_l2g;
         T_l2g.xx() = n.x(); T_l2g.xy() = t1.x(); T_l2g.xz() = t2.x();
@@ -251,15 +266,15 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
 
         const label faceCell = patch().faceCells()[i];
 
-        sigmaExtrapolatedGlobal.component(tensor::XX) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::XX) + ( grad_sigmaInternalField_XX[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::XY) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::XY) + ( grad_sigmaInternalField_XY[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::XZ) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::XZ) + ( grad_sigmaInternalField_XZ[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::YX) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::XY) + ( grad_sigmaInternalField_YX[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::YY) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::YY) + ( grad_sigmaInternalField_YY[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::YZ) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::YZ) + ( grad_sigmaInternalField_YZ[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::ZX) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::XZ) + ( grad_sigmaInternalField_ZX[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::ZY) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::YZ) + ( grad_sigmaInternalField_ZY[faceCell] & patchDeltas[i]);
-        sigmaExtrapolatedGlobal.component(tensor::ZZ) =  sigmaInternalField.internalField()[faceCell].component(symmTensor::ZZ) + ( grad_sigmaInternalField_ZZ[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::XX) =  sigma.internalField()[faceCell].component(symmTensor::XX) + ( grad_sigma_XX[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::XY) =  sigma.internalField()[faceCell].component(symmTensor::XY) + ( grad_sigma_XY[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::XZ) =  sigma.internalField()[faceCell].component(symmTensor::XZ) + ( grad_sigma_XZ[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::YX) =  sigma.internalField()[faceCell].component(symmTensor::XY) + ( grad_sigma_YX[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::YY) =  sigma.internalField()[faceCell].component(symmTensor::YY) + ( grad_sigma_YY[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::YZ) =  sigma.internalField()[faceCell].component(symmTensor::YZ) + ( grad_sigma_YZ[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::ZX) =  sigma.internalField()[faceCell].component(symmTensor::XZ) + ( grad_sigma_ZX[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::ZY) =  sigma.internalField()[faceCell].component(symmTensor::YZ) + ( grad_sigma_ZY[faceCell] & patchDeltas[i]);
+        sigmaExtrapolatedGlobal.component(tensor::ZZ) =  sigma.internalField()[faceCell].component(symmTensor::ZZ) + ( grad_sigma_ZZ[faceCell] & patchDeltas[i]);
 
         //Info << "sigmaInternalField: " << endl << sigmaInternalField[faceCell] << endl;
         //Info << "sigmaExtrapolatedGlobal: " << endl << sigmaExtrapolatedGlobal << endl;
@@ -277,12 +292,11 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
         sigmaPatchInternalGlobal.zy() = sigmaPatchInternalField[i].yz();
         sigmaPatchInternalGlobal.zz() = sigmaPatchInternalField[i].zz();
 
-
         // transformed to local coordinates sigmas ...
         tensor sigmaExtrapolatedLocal = T_g2l & (sigmaExtrapolatedGlobal & T_l2g);
         tensor sigmaPatchInternalLocal = T_g2l & (sigmaPatchInternalGlobal & T_l2g);
 
-
+/*
         // VALIDATION MOMENTUM TRANSPORT
 
         if(this->patch().name() == "in" || this->patch().name() == "insideCircle"){
@@ -318,20 +332,19 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
         else{
             Info << "Unknown boundary!!!" << endl;
         }
-
+*/
         // Set components of transformed sigma that are influenced by boundary condition (simple in local coordinates) ...
         // ... sigma_nn
 
-
-        //        sigmaExtrapolatedLocal.xx() = (     sigmaExtrapolatedLocal.xx() + d[i] * delta1.value() * ( Thetab - ThetaWall[i] ) )
- //                            /
- //                          (     1 - gamma1.value()*d[i] );
+        sigmaExtrapolatedLocal.xx() =   ( sigmaExtrapolatedLocal.xx() + d[i] * delta1.value() * ( Thetab - ThetaW ) )
+                                        /
+                                        ( 1 - gamma1.value()*d[i] );
         // ... sigma_nt1
-        //sigmaExtrapolatedLocal.xy() = alpha1.value() * (ub & t1); // + beta1.value() * (sb & t1);
-        //sigmaExtrapolatedLocal.yx() = sigmaExtrapolatedLocal.xy();
+        sigmaExtrapolatedLocal.xy() = alpha1.value() * (ub & t1) + beta1.value() * (sb & t1);
+        sigmaExtrapolatedLocal.yx() = sigmaExtrapolatedLocal.xy();
         // ... sigma_nt2
-        //sigmaExtrapolatedLocal.xz() = alpha1.value() * (ub & t2); // + beta1.value() * (sb & t2);
-        //sigmaExtrapolatedLocal.zx() = sigmaExtrapolatedLocal.xz();
+        sigmaExtrapolatedLocal.xz() = alpha1.value() * (ub & t2) + beta1.value() * (sb & t2);
+        sigmaExtrapolatedLocal.zx() = sigmaExtrapolatedLocal.xz();
 
 
         // transform back to global coordinates
@@ -349,8 +362,6 @@ void Foam::mySigmaFvPatchSymmTensorField::updateCoeffs()
         //Info << "sigmaBoundary[i]: " << endl << sigmaBoundary[i] << endl;
 
     }
-
-    //sigmaBoundary = sigmaPatchInternalField;  // zeroGradient(explizit)
 
     // Set updated = true
     fixedValueFvPatchSymmTensorField::updateCoeffs();

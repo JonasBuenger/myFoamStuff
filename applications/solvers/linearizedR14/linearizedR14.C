@@ -44,7 +44,6 @@ Description
 #include "vector14/blockVector14Matrix.H"
 #include "vector14.H"
 #include "tensor14.H"
-#include "../../../discretisation/finiteVolume/myFvm.H"
 #include "../../../blockMatrix/myBlockMatrices/linearizedR14Matrix.H"
 
 
@@ -65,7 +64,11 @@ int main(int argc, char *argv[])
 
     linearizedR14Matrix linR14(mesh, s, Theta, u, p, sigma);
 
-    linR14.updateMatrix();
+    bool updateOnlyRHS = false;
+
+    linR14.updateMatrix(updateOnlyRHS);
+
+    updateOnlyRHS = true;
 
 
     while(runTime.loop()) //for (runTime++; !runTime.end(); runTime++)
@@ -77,39 +80,7 @@ int main(int argc, char *argv[])
         for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
         {
 
-            linR14.updateMatrix();
-
-            //linR14.displayBlock(0);
-
-            //linR14.displayCurrVal(56);
-
-            /*
-            tmp<volTensorField> tgradU = fvc::grad(u);
-            volTensorField gradU = tgradU();
-
-            Info << gradU.internalField()[56] << endl;
-
-            tmp<volVectorField> tlaplacianSigma = fvc::div(sigma);
-            volVectorField& laplacianSigma = tlaplacianSigma();
-
-            Info << laplacianSigma.internalField()[56] << endl;
-
-            tmp<volTensorField> tgradU = fvc::grad(u);
-            volTensorField gradU = tgradU();
-
-            Info << gradU.internalField()[56] << endl;
-
-            tmp<volVectorField> tgradP = fvc::grad(p);
-            volVectorField& gradP = tgradP();
-
-            Info << gradP.internalField()[56] << endl;
-
-            tmp<volScalarField> tdivU = fvc::div(u);
-            volScalarField divU = tdivU();
-
-            Info << divU.internalField()[56] << endl;
-            */
-
+            linR14.updateMatrix(updateOnlyRHS);
 
             linR14.solve();
 

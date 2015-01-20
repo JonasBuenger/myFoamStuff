@@ -3,7 +3,6 @@ $(WM_PROJECT_USER_DIR)/blockMatrix/myBlockMatrices/linearizedR14Matrix.dep\
 $(WM_PROJECT_USER_DIR)/applications/bcs/myPressureFvPatchScalarField.dep\
 $(WM_PROJECT_USER_DIR)/applications/bcs/mySigmaFvPatchSymmTensorField.dep\
 $(WM_PROJECT_USER_DIR)/applications/bcs/myVelocityFvPatchVectorField.dep\
-$(WM_PROJECT_USER_DIR)/applications/bcs/myImplicitVelocity/myImplicitVelocityFvPatchVectorField.dep\
 $(WM_PROJECT_USER_DIR)/applications/bcs/myHeatFluxFvPatchVectorField.dep\
 $(WM_PROJECT_USER_DIR)/applications/bcs/myTemperatureFvPatchScalarField.dep\
 linearizedR14.dep

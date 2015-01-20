@@ -85,6 +85,14 @@ myPressureFvPatchScalarField
 {
 //    Info << "myPressure-Constructor 3" << endl;
     //fvPatchScalarField::operator=(alpha*patch().nf());
+    if (dict.found("value"))
+    {
+        Info << "found" << endl;
+        fixedValueFvPatchField<scalar>::operator==
+        (
+             Field<scalar>("value", dict, p.size())
+        );
+    }
 }
 
 
